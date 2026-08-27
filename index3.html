@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abdul Qayyuum — Information Systems Engineer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#111111',
+                        paper: '#f4f3ee',
+                        acid: '#c8ff00',
+                        muted: '#77766f',
+                        line: '#d5d4ce'
+                    },
+
+                    fontFamily: {
+                        sans: ['Inter', 'Arial', 'sans-serif'],
+                        display: ['Arial Black', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f3ee;
+            color: #111111;
+            font-family: 'Inter', sans-serif;
+        }
+
+        ::selection {
+            background: #c8ff00;
+            color: #111111;
+        }
+
+        .mono {
+            font-family: 'DM Mono', monospace;
+        }
+
+        .display {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.07em;
+        }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(#1111110c 1px, transparent 1px),
+                linear-gradient(90deg, #1111110c 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .hover-lift {
+            transition:
+                transform 180ms ease,
+                background 180ms ease,
+                color 180ms ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: scroll 24s linear infinite;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- NAVIGATION -->
+<!-- ========================================================= -->
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-paper/90 backdrop-blur border-b border-ink">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+
+        <a
+            href="#top"
+            class="font-black text-lg tracking-tight"
+        >
+            AQ<span class="text-acid bg-ink px-1">.</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider">
+
+            <a href="#about" class="hover:underline underline-offset-4">
+                About
+            </a>
+
+            <a href="#experience" class="hover:underline underline-offset-4">
+                Experience
+            </a>
+
+            <a href="#skills" class="hover:underline underline-offset-4">
+                Skills
+            </a>
+
+            <a href="#education" class="hover:underline underline-offset-4">
+                Education
+            </a>
+
+        </nav>
+
+        <a
+            href="file/CV lattest.pdf"
+            download
+            class="mono text-xs border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition"
+        >
+            DOWNLOAD CV ↗
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<main id="top">
+
+<section class="min-h-screen pt-28 pb-20 px-5 lg:px-8 grid-bg">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="flex justify-between items-start mb-16">
+
+            <div class="mono text-xs">
+                01 / PORTFOLIO
+            </div>
+
+            <div class="mono text-xs text-right">
+                2026<br>
+                SELANGOR, MY
+            </div>
+
+        </div>
+
+
+        <div class="grid lg:grid-cols-12 gap-10 items-end">
+
+            <div class="lg:col-span-9">
+
+                <p class="mono text-sm mb-6">
+                    INFORMATION SYSTEMS · DATA · SOFTWARE
+                </p>
+
+                <h1 class="display text-[17vw] lg:text-[10rem] leading-[0.78] uppercase">
+                    Abdul<br>
+                    Qayyuum
+                </h1>
+
+            </div>
+
+
+            <div class="lg:col-span-3 pb-3">
+
+                <div class="border-l-4 border-ink pl-5">
+
+                    <p class="text-xl font-semibold leading-tight">
+                        Building practical systems from messy data.
+                    </p>
+
+                    <p class="text-sm text-muted mt-5 leading-relaxed">
+                        Information Systems student with hands-on experience
+                        across SQL reporting, business intelligence,
+                        Microsoft Fabric, automation and web systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="mt-20 border-t border-ink pt-5 flex flex-col md:flex-row justify-between gap-5">
+
+            <div class="flex flex-wrap gap-x-8 gap-y-2 text-xs mono uppercase">
+                <span>AI / DATA</span>
+                <span>SOFTWARE</span>
+                <span>BUSINESS SYSTEMS</span>
+                <span>AUTOMATION</span>
+            </div>
+
+            <a
+                href="mailto:abdulqayyuum21@gmail.com"
+                class="font-bold text-sm hover:underline"
+            >
+                LET'S WORK TOGETHER →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- ABOUT -->
+<!-- ========================================================= -->
+
+<section id="about" class="border-t border-ink">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-24">
+
+        <div class="grid lg:grid-cols-12 gap-12">
+
+            <div class="lg:col-span-2">
+
+                <span class="mono text-xs">
+                    02 / ABOUT
+                </span>
+
+            </div>
+
+
+            <div class="lg:col-span-7">
+
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-[0.95]">
+                    I like turning
+                    <span class="bg-acid px-2">data</span>
+                    into something people can actually use.
+                </h2>
+
+                <div class="mt-10 space-y-5 text-lg leading-relaxed text-neutral-700">
+
+                    <p>
+                        My work sits between information systems,
+                        data engineering, analytics and software development.
+                    </p>
+
+                    <p>
+                        During my professional experience, I have worked
+                        with enterprise SQL reporting, Power BI dashboards,
+                        Microsoft Fabric architectures and internal web systems.
+                    </p>
+
+                    <p>
+                        I am particularly interested in building systems
+                        that reduce repetitive work, make information easier
+                        to understand and help people make better decisions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="lg:col-span-3">
+
+                <div class="border-t border-ink pt-4 mb-8">
+
+                    <p class="mono text-xs text-muted">
+                        CURRENT FOCUS
+                    </p>
+
+                    <p class="font-bold mt-2">
+                        AI · Data Engineering · Business Intelligence
+                    </p>
+
+                </div>
+
+                <div class="border-t border-ink pt-4">
+
+                    <p class="mono text-xs text-muted">
+                        AVAILABILITY
+                    </p>
+
+                    <p class="font-bold mt-2">
+                        Open to AI & Software Roles
+                    </p>
+
+                    <p class="text-sm text-muted mt-1">
+                        Available to relocate
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- EXPERIENCE -->
+<!-- ========================================================= -->
+
+<section id="experience" class="bg-ink text-paper border-t border-ink">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-24">
+
+        <div class="flex justify-between items-end mb-20">
+
+            <div>
+
+                <p class="mono text-xs text-acid mb-4">
+                    03 / EXPERIENCE
+                </p>
+
+                <h2 class="text-5xl md:text-7xl font-black tracking-tight">
+                    Work
+                </h2>
+
+            </div>
+
+            <span class="mono text-xs text-neutral-500">
+                2023 — 2026
+            </span>
+
+        </div>
+
+
+        <!-- MAIN EXPERIENCE -->
+
+        <article class="border-t border-neutral-700 py-10">
+
+            <div class="grid lg:grid-cols-12 gap-8">
+
+                <div class="lg:col-span-2">
+
+                    <span class="mono text-xs text-acid">
+                        01
+                    </span>
+
+                    <p class="mono text-xs text-neutral-500 mt-3">
+                        APR 2026 — PRESENT
+                    </p>
+
+                </div>
+
+
+                <div class="lg:col-span-7">
+
+                    <h3 class="text-3xl md:text-4xl font-black tracking-tight">
+                        Information System
+                        Engineering Intern
+                    </h3>
+
+                    <p class="mt-2 text-acid font-semibold">
+                        Al-Ikhsan · KL HQ
+                    </p>
+
+                    <div class="mt-8 space-y-5 text-neutral-300 leading-relaxed">
+
+                        <p>
+                            Engineered analytical reports using raw SQL
+                            queries and Excel SQL data connections to support
+                            business reporting.
+                        </p>
+
+                        <p>
+                            Designed and deployed the Purchase Order (PO)
+                            Budget and MOH budget control management system.
+                        </p>
+
+                        <p>
+                            Assisted the migration of business analytics
+                            from legacy Qlik Sense reporting into interactive
+                            Power BI dashboards.
+                        </p>
+
+                        <p>
+                            Worked on backend pipelines, notebooks,
+                            Lakehouse and warehouse structures within
+                            Microsoft Fabric.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lg:col-span-3">
+
+                    <div class="border border-neutral-700 p-5">
+
+                        <p class="mono text-xs text-neutral-500">
+                            AREA
+                        </p>
+
+                        <p class="font-bold mt-2">
+                            Enterprise Data
+                        </p>
+
+                        <p class="font-bold">
+                            Business Intelligence
+                        </p>
+
+                        <p class="font-bold">
+                            Data Engineering
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- SECOND EXPERIENCE -->
+
+        <article class="border-t border-neutral-700 py-10">
+
+            <div class="grid lg:grid-cols-12 gap-8">
+
+                <div class="lg:col-span-2">
+
+                    <span class="mono text-xs text-acid">
+                        02
+                    </span>
+
+                    <p class="mono text-xs text-neutral-500 mt-3">
+                        SEP 2023 — FEB 2024
+                    </p>
+
+                </div>
+
+
+                <div class="lg:col-span-7">
+
+                    <h3 class="text-3xl font-black tracking-tight">
+                        ICT & Web Systems Intern
+                    </h3>
+
+                    <p class="mt-2 text-acid font-semibold">
+                        Pejabat Tanah Batu Pahat · Johor
+                    </p>
+
+                    <div class="mt-8 space-y-5 text-neutral-300 leading-relaxed">
+
+                        <p>
+                            Built an internal web reporting application
+                            for the Penguatkuasa department to manage
+                            case reports.
+                        </p>
+
+                        <p>
+                            Developed an enterprise asset tracking website
+                            for recording hardware assets and maintenance
+                            history across the organisation.
+                        </p>
+
+                        <p>
+                            Provided technical IT and infrastructure support
+                            across administrative departments.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lg:col-span-3">
+
+                    <div class="border border-neutral-700 p-5">
+
+                        <p class="mono text-xs text-neutral-500">
+                            AREA
+                        </p>
+
+                        <p class="font-bold mt-2">
+                            Web Systems
+                        </p>
+
+                        <p class="font-bold">
+                            Internal Tools
+                        </p>
+
+                        <p class="font-bold">
+                            IT Support
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- OTHER EXPERIENCE -->
+
+        <div class="grid md:grid-cols-2 border-t border-neutral-700">
+
+            <article class="py-8 md:pr-8 md:border-r border-neutral-700">
+
+                <span class="mono text-xs text-acid">
+                    03
+                </span>
+
+                <div class="flex justify-between gap-4 mt-4">
+
+                    <h3 class="text-xl font-bold">
+                        Bouquet Part Timer
+                    </h3>
+
+                    <span class="mono text-xs text-neutral-500">
+                        MAY 2024
+                    </span>
+
+                </div>
+
+                <p class="text-sm text-neutral-500 mt-2">
+                    Mardiyyah Hotel · Shah Alam
+                </p>
+
+                <p class="text-sm text-neutral-300 mt-5 leading-relaxed">
+                    Provided customer service and coordinated venue
+                    management for corporate events.
+                </p>
+
+            </article>
+
+
+            <article class="py-8 md:pl-8">
+
+                <span class="mono text-xs text-acid">
+                    04
+                </span>
+
+                <div class="flex justify-between gap-4 mt-4">
+
+                    <h3 class="text-xl font-bold">
+                        Warehouse Worker
+                    </h3>
+
+                    <span class="mono text-xs text-neutral-500">
+                        FEB 2026
+                    </span>
+
+                </div>
+
+                <p class="text-sm text-neutral-500 mt-2">
+                    Shopee · Shah Alam
+                </p>
+
+                <p class="text-sm text-neutral-300 mt-5 leading-relaxed">
+                    Managed high-volume operations, parcel organisation
+                    and logistics processing.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- SKILLS -->
+<!-- ========================================================= -->
+
+<section id="skills" class="border-b border-ink">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-24">
+
+        <div class="grid lg:grid-cols-12 gap-12">
+
+            <div class="lg:col-span-3">
+
+                <p class="mono text-xs mb-4">
+                    04 / TOOLBOX
+                </p>
+
+                <h2 class="text-5xl font-black tracking-tight">
+                    Skills
+                </h2>
+
+            </div>
+
+
+            <div class="lg:col-span-9">
+
+                <!-- LANGUAGES -->
+
+                <div class="border-t border-ink py-7">
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        <h3 class="font-bold">
+                            Languages & Core
+                        </h3>
+
+                        <div class="md:col-span-2 flex flex-wrap gap-x-5 gap-y-3">
+
+                            <span>Python</span>
+                            <span>SQL</span>
+                            <span>JavaScript</span>
+                            <span>PHP</span>
+                            <span>R</span>
+                            <span>C++</span>
+                            <span>HTML5 / CSS3</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATA -->
+
+                <div class="border-t border-ink py-7">
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        <h3 class="font-bold">
+                            AI & Data
+                        </h3>
+
+                        <div class="md:col-span-2 flex flex-wrap gap-x-5 gap-y-3">
+
+                            <span>Microsoft Fabric</span>
+                            <span>Power BI</span>
+                            <span>Machine Learning</span>
+                            <span>n8n Agentic AI</span>
+                            <span>MySQL Workbench</span>
+                            <span>Oracle APEX</span>
+                            <span>Laragon</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOFT -->
+
+                <div class="border-t border-ink py-7">
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        <h3 class="font-bold">
+                            How I Work
+                        </h3>
+
+                        <div class="md:col-span-2 flex flex-wrap gap-x-5 gap-y-3">
+
+                            <span>Leadership</span>
+                            <span>Project Management</span>
+                            <span>Critical Thinking</span>
+                            <span>Problem Solving</span>
+                            <span>Time Management</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- EDUCATION -->
+<!-- ========================================================= -->
+
+<section id="education" class="bg-acid border-b border-ink">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-24">
+
+        <div class="grid lg:grid-cols-12 gap-12">
+
+            <div class="lg:col-span-3">
+
+                <p class="mono text-xs mb-4">
+                    05 / EDUCATION
+                </p>
+
+                <h2 class="text-5xl md:text-6xl font-black tracking-tight">
+                    Learning
+                </h2>
+
+            </div>
+
+
+            <div class="lg:col-span-9">
+
+                <div class="grid md:grid-cols-2 gap-10">
+
+                    <div class="border-t-2 border-ink pt-5">
+
+                        <p class="mono text-xs">
+                            2023 — CURRENT
+                        </p>
+
+                        <h3 class="text-2xl font-black mt-3">
+                            UiTM Shah Alam
+                        </h3>
+
+                        <p class="mt-2 font-semibold">
+                            Bachelor of Information Systems (Hons.)
+                            Intelligence System Engineering
+                        </p>
+
+                        <p class="mono text-sm mt-5">
+                            CGPA 3.48
+                        </p>
+
+                    </div>
+
+
+                    <div class="border-t-2 border-ink pt-5">
+
+                        <p class="mono text-xs">
+                            2021 — 2024
+                        </p>
+
+                        <h3 class="text-2xl font-black mt-3">
+                            UiTM Segamat
+                        </h3>
+
+                        <p class="mt-2 font-semibold">
+                            Diploma in Computer Science
+                        </p>
+
+                        <p class="mono text-sm mt-5">
+                            CGPA 3.62
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CERTIFICATIONS -->
+
+                <div class="mt-20 border-t-2 border-ink pt-8">
+
+                    <h3 class="text-2xl font-black mb-8">
+                        Certifications & Training
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-x-10">
+
+                        <div class="border-b border-ink py-5">
+
+                            <p class="mono text-xs">
+                                2026
+                            </p>
+
+                            <h4 class="font-bold mt-2">
+                                Agentic AI & n8n Automation
+                            </h4>
+
+                            <p class="text-sm mt-1">
+                                MSU Academy
+                            </p>
+
+                            <p class="text-sm mt-3">
+                                Autonomous AI workflows, approvals
+                                & reporting automation.
+                            </p>
+
+                        </div>
+
+
+                        <div class="border-b border-ink py-5">
+
+                            <p class="mono text-xs">
+                                2025
+                            </p>
+
+                            <h4 class="font-bold mt-2">
+                                Google Cloud Data Practitioner
+                            </h4>
+
+                            <p class="text-sm mt-3">
+                                Data ingestion, pipelines, machine
+                                learning and visualization.
+                            </p>
+
+                        </div>
+
+
+                        <div class="border-b border-ink py-5">
+
+                            <p class="mono text-xs">
+                                2023
+                            </p>
+
+                            <h4 class="font-bold mt-2">
+                                Oracle APEX App Development & Design
+                            </h4>
+
+                            <p class="text-sm mt-3">
+                                Low-code application engineering
+                                & relational database design.
+                            </p>
+
+                        </div>
+
+
+                        <div class="border-b border-ink py-5">
+
+                            <p class="mono text-xs">
+                                2025
+                            </p>
+
+                            <h4 class="font-bold mt-2">
+                                Ericsson 5G & Emerging Tech Badges
+                            </h4>
+
+                            <p class="text-sm mt-3">
+                                5G fundamentals, IoT, Edge Computing
+                                and Cloud infrastructure.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- CONTACT -->
+<!-- ========================================================= -->
+
+<section class="bg-ink text-paper">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-24">
+
+        <div class="grid md:grid-cols-12 gap-10">
+
+            <div class="md:col-span-8">
+
+                <p class="mono text-xs text-acid mb-6">
+                    06 / CONTACT
+                </p>
+
+                <h2 class="display text-6xl md:text-8xl leading-[0.85]">
+                    HAVE A<br>
+                    PROBLEM?
+                </h2>
+
+                <p class="text-neutral-400 max-w-xl mt-10 text-lg leading-relaxed">
+                    If you are looking for someone who can work across
+                    data, software and business systems, let's talk.
+                </p>
+
+            </div>
+
+
+            <div class="md:col-span-4 md:flex md:items-end">
+
+                <div class="w-full">
+
+                    <a
+                        href="mailto:abdulqayyuum21@gmail.com"
+                        class="block border border-neutral-600 p-5 hover:bg-acid hover:text-ink hover:border-acid transition group"
+                    >
+
+                        <span class="mono text-xs">
+                            EMAIL
+                        </span>
+
+                        <span class="block text-lg font-bold mt-3 break-all">
+                            abdulqayyuum21@gmail.com
+                        </span>
+
+                        <span class="block mt-8 text-right">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                    <div class="border-x border-b border-neutral-600 p-5">
+
+                        <span class="mono text-xs text-neutral-500">
+                            PHONE
+                        </span>
+
+                        <span class="block font-bold mt-3">
+                            +6017-747-1672
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-ink border-t border-neutral-800 text-neutral-500">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-col md:flex-row justify-between gap-3">
+
+        <span class="mono text-xs">
+            © 2026 ABDUL QAYYUUM
+        </span>
+
+        <span class="mono text-xs">
+            INFORMATION SYSTEMS · DATA · SOFTWARE
+        </span>
+
+    </div>
+
+</footer>
+
+</main>
+
+</body>
+</html>

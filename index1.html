@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdul Qayyuum — Information Systems Engineer</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy:"#14213D",
+        blue:"#2563EB",
+        paper:"#F8FAFC",
+        ink:"#172033",
+        muted:"#64748B",
+        border:"#E2E8F0",
+        pale:"#EFF6FF"
+      }
+    }
+  }
+}
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar-link');
+
+const observerOptions = {
+  root: null,
+  rootMargin: '-20% 0px -70% 0px', // Triggers when the section reaches the upper portion of the viewport
+  threshold: 0
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const activeId = entry.target.getAttribute('id');
+      
+      navLinks.forEach((link) => {
+        if (link.getAttribute('data-section') === activeId) {
+          link.classList.add('bg-white/10', 'text-white');
+          link.classList.remove('text-slate-300');
+        } else {
+          link.classList.remove('bg-white/10', 'text-white');
+          link.classList.add('text-slate-300');
+        }
+      });
+    }
+  });
+}, observerOptions);
+
+sections.forEach((section) => observer.observe(section));
+</script>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#f8fafc;
+  color:#172033;
+  font-family:Inter,sans-serif;
+}
+body.menu-open{overflow:hidden}
+.mono{font-family:"DM Mono",monospace}
+
+.sidebar{
+  position:fixed;
+  width:310px;
+  height:100vh;
+  left:0;
+  top:0;
+  z-index:50;
+}
+.main{margin-left:310px}
+.section{max-width:1000px}
+
+.experience-item,.skill-item{transition:all .2s ease}
+.experience-item:hover{transform:translateX(5px)}
+.skill-item:hover{background:#eff6ff;border-color:#bfdbfe}
+
+.grid-bg{
+  background-image:
+    linear-gradient(rgba(37,99,235,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+.hero-orb{animation:float 7s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+
+.data-dot{animation:pulseDot 2.4s ease-in-out infinite}
+.data-dot:nth-child(2){animation-delay:.4s}
+.data-dot:nth-child(3){animation-delay:.8s}
+.data-dot:nth-child(4){animation-delay:1.2s}
+@keyframes pulseDot{
+  0%,100%{opacity:.35;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.15)}
+}
+
+.flow-line{
+  stroke-dasharray:8 8;
+  animation:dash 2.2s linear infinite;
+}
+@keyframes dash{to{stroke-dashoffset:-32}}
+
+.bar{
+  transform-origin:bottom;
+  animation:grow 1.4s ease both;
+}
+@keyframes grow{from{transform:scaleY(0)}}
+
+/* =========================
+   MOBILE DRAWER
+   ========================= */
+.mobile-drawer{
+  position:fixed;
+  top:0;
+  left:0;
+  width:min(330px,88vw);
+  height:100dvh;
+  background:#14213D;
+  color:white;
+  z-index:100;
+  transform:translateX(-105%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:18px 0 45px rgba(2,8,23,.28);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  visibility:hidden;
+}
+.mobile-drawer.open{
+  transform:translateX(0);
+  visibility:visible;
+}
+
+.mobile-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.52);
+  backdrop-filter:blur(2px);
+  z-index:90;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .25s ease, visibility .25s ease;
+}
+.mobile-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.mobile-link{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:14px 12px;
+  border-radius:9px;
+  color:#cbd5e1;
+  font-size:14px;
+  transition:.2s;
+}
+.mobile-link:hover,
+.mobile-link:focus{
+  background:rgba(255,255,255,.07);
+  color:white;
+}
+.mobile-link.active{
+  background:rgba(255,255,255,.10);
+  color:white;
+}
+
+.drawer-close{
+  width:44px;
+  height:44px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.06);
+  transition:.2s;
+}
+.drawer-close:hover{
+  background:rgba(255,255,255,.12);
+}
+
+/* =========================
+   TECHNOLOGY MAP
+   ========================= */
+.tech-map{
+  position:relative;
+  height:235px;
+}
+.tech-node{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:600;
+}
+.tech-node.data{
+  left:50%;
+  top:0;
+  width:112px;
+  height:42px;
+  transform:translateX(-50%);
+  background:#2563EB;
+  color:#fff;
+}
+.tech-node.sql{
+  left:0;
+  top:66px;
+  width:92px;
+  height:44px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+.tech-node.bi{
+  right:0;
+  top:66px;
+  width:92px;
+  height:44px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+.tech-node.value{
+  left:50%;
+  bottom:0;
+  width:145px;
+  height:52px;
+  transform:translateX(-50%);
+  background:#fff;
+  color:#14213D;
+}
+
+.tech-arrows{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+.tech-arrows path{
+  stroke:#60A5FA;
+  stroke-width:2.2;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.95;
+}
+.tech-arrows .animated{
+  stroke-dasharray:7 7;
+  animation:dash 2.2s linear infinite;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width:1023px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+
+  .mobile-header{
+    position:sticky;
+    top:0;
+    z-index:80;
+  }
+
+  .hero-grid{
+    display:block !important;
+  }
+  .hero-copy{
+    width:100% !important;
+  }
+  .hero-visual{
+    width:100% !important;
+    margin-top:36px;
+  }
+
+  .hero-orb{
+    animation:none;
+  }
+
+  .tech-card{
+    min-height:0 !important;
+  }
+
+  .experience-item:hover{
+    transform:none;
+  }
+}
+
+@media (max-width:640px){
+  .section{
+    width:100%;
+  }
+
+  .hero-heading{
+    font-size:2.35rem !important;
+    line-height:1.08 !important;
+  }
+
+  .tech-map{
+    height:215px;
+  }
+
+  .tech-node.data{
+    width:100px;
+    height:38px;
+  }
+
+  .tech-node.sql,
+  .tech-node.bi{
+    width:82px;
+    height:40px;
+    top:60px;
+  }
+
+  .tech-node.value{
+    width:132px;
+    height:48px;
+  }
+
+  .tech-card{
+    padding:18px !important;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     DESKTOP SIDEBAR
+     ========================= -->
+<aside class="sidebar bg-navy text-white hidden lg:flex flex-col p-10">
+  <div>
+    <div class="mb-12">
+      <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-7">
+        <span class="text-xl font-bold">AQ</span>
+      </div>
+
+      <h1 class="text-3xl font-bold tracking-tight">Abdul<br>Qayyuum</h1>
+      <p class="text-blue-300 font-medium mt-4">Information Systems Engineer</p>
+    </div>
+
+    <nav class="space-y-2" aria-label="Desktop navigation">
+        <a href="#summary" data-section="summary" class="sidebar-link block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition">01 &nbsp; Profile</a>
+        <a href="#experience" data-section="experience" class="sidebar-link block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition">02 &nbsp; Experience</a>
+        <a href="#skills" data-section="skills" class="sidebar-link block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition">03 &nbsp; Expertise</a>
+        <a href="#education" data-section="education" class="sidebar-link block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition">04 &nbsp; Education</a>
+    </nav>
+  </div>
+
+  <div class="mt-auto">
+    <div class="border-t border-white/10 pt-7">
+      <p class="mono text-[10px] text-slate-500 uppercase mb-4">Contact</p>
+      <a href="mailto:abdulqayyuum21@gmail.com" class="block text-sm text-slate-200 hover:text-blue-300 break-all">
+        abdulqayyuum21@gmail.com
+      </a>
+      <p class="text-sm text-slate-400 mt-3">+6017-747-1672</p>
+      <p class="text-sm text-slate-400 mt-1">Selangor, Malaysia</p>
+    </div>
+
+    <a href="file/CV lattest.pdf"
+       download
+       class="mt-6 w-full group inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-white hover:bg-slate-800 text-slate-800 hover:text-white text-sm font-medium rounded-lg transition-colors duration-200">
+      <svg class="w-4 h-4 stroke-blue-600 group-hover:stroke-white transition-colors duration-200"
+           fill="none"
+           stroke-width="2"
+           viewBox="0 0 24 24"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+      </svg>
+      <span>Download CV</span>
+    </a>
+  </div>
+</aside>
+
+<!-- =========================
+     MOBILE HEADER
+     ========================= -->
+<header class="mobile-header lg:hidden bg-navy text-white">
+  <div class="px-5 py-4 flex items-center justify-between">
+    <a href="#summary" onclick="closeMobileMenu()" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+        <span class="font-bold">AQ</span>
+      </div>
+      <div>
+        <p class="font-bold text-sm">Abdul Qayyuum</p>
+        <p class="text-[11px] text-blue-300 mt-0.5">Information Systems Engineer</p>
+      </div>
+    </a>
+
+    <button id="menuButton"
+            onclick="toggleMobileMenu()"
+            class="w-11 h-11 rounded-lg bg-white/10 flex items-center justify-center"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobileMenu">
+      <svg id="menuIcon"
+           xmlns="http://www.w3.org/2000/svg"
+           width="21"
+           height="21"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="mobileOverlay"
+     class="mobile-overlay"
+     onclick="closeMobileMenu()"
+     aria-hidden="true"></div>
+
+<!-- =========================
+     MOBILE SIDE DRAWER
+     ========================= -->
+<aside id="mobileMenu"
+       class="mobile-drawer"
+       aria-label="Mobile navigation"
+       aria-hidden="true">
+
+  <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+        <span class="font-bold">AQ</span>
+      </div>
+      <div>
+        <p class="font-bold text-sm">Abdul Qayyuum</p>
+        <p class="text-[11px] text-blue-300 mt-0.5">Information Systems Engineer</p>
+      </div>
+    </div>
+
+    <button id="drawerClose"
+            onclick="closeMobileMenu()"
+            class="drawer-close"
+            aria-label="Close navigation">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="21"
+           height="21"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="px-5 py-6">
+    <p class="mono text-[10px] text-slate-500 uppercase mb-4">Navigation</p>
+
+    <nav class="space-y-1">
+      <a href="#summary" onclick="closeMobileMenu()" class="mobile-link">
+        <span class="mono text-[10px] text-slate-500">01</span>
+        <span>Profile</span>
+      </a>
+
+      <a href="#experience" onclick="closeMobileMenu()" class="mobile-link">
+        <span class="mono text-[10px] text-slate-500">02</span>
+        <span>Experience</span>
+      </a>
+
+      <a href="#skills" onclick="closeMobileMenu()" class="mobile-link">
+        <span class="mono text-[10px] text-slate-500">03</span>
+        <span>Expertise</span>
+      </a>
+
+      <a href="#education" onclick="closeMobileMenu()" class="mobile-link">
+        <span class="mono text-[10px] text-slate-500">04</span>
+        <span>Education</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="mx-5 border-t border-white/10"></div>
+
+  <div class="px-5 py-6">
+    <p class="mono text-[10px] text-slate-500 uppercase mb-4">Contact</p>
+
+    <a href="mailto:abdulqayyuum21@gmail.com"
+       class="block text-sm text-slate-200 break-all hover:text-blue-300">
+      abdulqayyuum21@gmail.com
+    </a>
+
+    <p class="text-sm text-slate-400 mt-3">+6017-747-1672</p>
+    <p class="text-sm text-slate-400 mt-1">Selangor, Malaysia</p>
+
+    <a href="file/CV lattest.pdf"
+       download
+       class="mt-6 w-full group inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-white hover:bg-slate-800 text-slate-800 hover:text-white text-sm font-medium rounded-lg transition-colors duration-200">
+      <svg class="w-4 h-4 stroke-blue-600 group-hover:stroke-white transition-colors duration-200"
+           fill="none"
+           stroke-width="2"
+           viewBox="0 0 24 24"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+      </svg>
+      <span>Download CV</span>
+    </a>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- =========================
+     PROFILE / HERO
+     ========================= -->
+<section id="summary" class="bg-white border-b border-border">
+  <div class="section mx-auto px-6 lg:px-14 py-14 lg:py-16">
+
+    <div class="hero-grid grid lg:grid-cols-12 gap-10 items-center">
+
+      <div class="hero-copy lg:col-span-7">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+          <span class="mono text-[10px] text-slate-500 uppercase">Available for opportunities</span>
+        </div>
+
+        <h2 class="hero-heading text-4xl lg:text-6xl font-bold tracking-tight text-navy max-w-4xl">
+          Information systems,
+          <span class="text-blue-600">data</span>
+          and software ᯓ★
+          built for real business problems.
+        </h2>
+
+        <p class="mt-6 text-base lg:text-lg text-muted leading-relaxed max-w-3xl">
+          Technology-focused Information Systems professional with hands-on
+          experience in enterprise SQL reporting, Power BI, Microsoft Fabric,
+          business systems, automation and web application development.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a href="#experience"
+             class="bg-navy text-white px-5 py-3 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">
+            View experience →
+          </a>
+
+          <a href="mailto:abdulqayyuum21@gmail.com"
+             class="border border-border px-5 py-3 rounded-lg text-sm font-semibold hover:border-blue-300 hover:bg-pale transition">
+            Contact me
+          </a>
+        </div>
+      </div>
+
+      <!-- Visual system card -->
+      <div class="hero-visual lg:col-span-5">
+        <div class="tech-card relative overflow-hidden rounded-2xl border border-border bg-paper grid-bg p-5 shadow-sm hero-orb">
+
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <p class="mono text-[9px] text-blue-600 uppercase">Systems overview</p>
+              <p class="font-semibold mt-1">From data to insight</p>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          </div>
+
+          <svg viewBox="0 0 500 235" class="w-full h-auto" role="img" aria-label="Systems overview showing SQL, Microsoft Fabric, BI, Lakehouse, Web Systems and Automation connected together">
+            <defs>
+              <linearGradient id="flow" x1="0" x2="1">
+                <stop offset="0%" stop-color="#93c5fd"/>
+                <stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient>
+            </defs>
+
+            <path d="M100 62 H190 M310 62 H400 M250 89 V142 M100 177 H190 M310 177 H400"
+                  fill="none"
+                  stroke="url(#flow)"
+                  stroke-width="2"
+                  class="flow-line"/>
+
+            <rect x="25" y="35" width="75" height="54" rx="9" fill="#14213D"/>
+            <text x="62" y="58" text-anchor="middle" fill="white" font-size="11" font-weight="600">SQL</text>
+            <text x="62" y="74" text-anchor="middle" fill="#93c5fd" font-size="8">DATA</text>
+
+            <rect x="190" y="35" width="120" height="54" rx="9" fill="#2563EB"/>
+            <text x="250" y="58" text-anchor="middle" fill="white" font-size="11" font-weight="600">MICROSOFT FABRIC</text>
+            <text x="250" y="74" text-anchor="middle" fill="#dbeafe" font-size="8">PIPELINE</text>
+
+            <rect x="400" y="35" width="75" height="54" rx="9" fill="#14213D"/>
+            <text x="437" y="58" text-anchor="middle" fill="white" font-size="11" font-weight="600">BI</text>
+            <text x="437" y="74" text-anchor="middle" fill="#93c5fd" font-size="8">INSIGHT</text>
+
+            <rect x="190" y="142" width="120" height="54" rx="9" fill="white" stroke="#cbd5e1"/>
+            <text x="250" y="165" text-anchor="middle" fill="#172033" font-size="11" font-weight="600">LAKEHOUSE</text>
+            <text x="250" y="181" text-anchor="middle" fill="#64748B" font-size="8">WAREHOUSE</text>
+
+            <rect x="25" y="150" width="75" height="54" rx="9" fill="white" stroke="#cbd5e1"/>
+            <text x="62" y="173" text-anchor="middle" fill="#172033" font-size="11" font-weight="600">WEB</text>
+            <text x="62" y="189" text-anchor="middle" fill="#64748B" font-size="8">SYSTEMS</text>
+
+            <rect x="400" y="150" width="75" height="54" rx="9" fill="white" stroke="#cbd5e1"/>
+            <text x="437" y="173" text-anchor="middle" fill="#172033" font-size="11" font-weight="600">AUTO</text>
+            <text x="437" y="189" text-anchor="middle" fill="#64748B" font-size="8">WORKFLOW</text>
+
+            <circle class="data-dot" cx="145" cy="62" r="4" fill="#2563EB"/>
+            <circle class="data-dot" cx="355" cy="62" r="4" fill="#2563EB"/>
+            <circle class="data-dot" cx="145" cy="177" r="4" fill="#2563EB"/>
+            <circle class="data-dot" cx="355" cy="177" r="4" fill="#2563EB"/>
+          </svg>
+
+          <div class="grid grid-cols-3 gap-2 mt-2">
+            <div class="bg-white border border-border rounded-lg p-3">
+              <p class="mono text-[8px] text-slate-400">CORE</p>
+              <p class="font-bold text-sm mt-1">SQL</p>
+            </div>
+            <div class="bg-white border border-border rounded-lg p-3">
+              <p class="mono text-[8px] text-slate-400">BI</p>
+              <p class="font-bold text-sm mt-1">Power BI</p>
+            </div>
+            <div class="bg-white border border-border rounded-lg p-3">
+              <p class="mono text-[8px] text-slate-400">DATA</p>
+              <p class="font-bold text-sm mt-1">Fabric</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recruiter quick facts -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+      <div class="bg-paper border border-border rounded-xl p-5">
+        <p class="mono text-[9px] text-slate-400 uppercase">Latest Activity</p>
+        <p class="font-semibold mt-2 text-sm">Information System Engineering Intern</p>
+        <p class="text-xs text-muted mt-1">Al-Ikhsan · KL HQ</p>
+      </div>
+
+      <div class="bg-paper border border-border rounded-xl p-5">
+        <p class="mono text-[9px] text-slate-400 uppercase">Primary Focus</p>
+        <p class="font-semibold mt-2 text-sm">Data & Business Intelligence</p>
+        <p class="text-xs text-muted mt-1">SQL · Power BI · Fabric</p>
+      </div>
+
+      <div class="bg-paper border border-border rounded-xl p-5">
+        <p class="mono text-[9px] text-slate-400 uppercase">Degree</p>
+        <p class="font-semibold mt-2 text-sm">BSc Information Systems</p>
+        <p class="text-xs text-muted mt-1">Intelligence System Engineering</p>
+      </div>
+
+      <div class="bg-paper border border-border rounded-xl p-5">
+        <p class="mono text-[9px] text-slate-400 uppercase">Location</p>
+        <p class="font-semibold mt-2 text-sm">Selangor, Malaysia</p>
+        <p class="text-xs text-muted mt-1">Open to opportunities</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================
+     CORE EXPERTISE
+     ========================= -->
+<section class="bg-paper border-b border-border">
+  <div class="section mx-auto px-6 lg:px-14 py-14">
+
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <p class="mono text-[10px] text-blue-600 uppercase">At a glance</p>
+        <h2 class="text-2xl font-bold mt-2">Core Expertise</h2>
+      </div>
+      <span class="hidden sm:block text-xs text-slate-400">What I can contribute</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+
+      <div class="bg-white border border-border rounded-xl p-6 skill-item">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">01</div>
+          <div>
+            <h3 class="font-bold">Business Intelligence</h3>
+            <p class="text-sm text-muted mt-2 leading-relaxed">
+              Business reporting, dashboard development and analytics migration using Power BI.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-border rounded-xl p-6 skill-item">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">02</div>
+          <div>
+            <h3 class="font-bold">Data Engineering</h3>
+            <p class="text-sm text-muted mt-2 leading-relaxed">
+              Data pipelines, notebooks, Lakehouse and warehouse structures using Microsoft Fabric.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-border rounded-xl p-6 skill-item">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">03</div>
+          <div>
+            <h3 class="font-bold">Business Systems</h3>
+            <p class="text-sm text-muted mt-2 leading-relaxed">
+              Internal systems for budget control, reporting, asset management and operations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-border rounded-xl p-6 skill-item">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">04</div>
+          <div>
+            <h3 class="font-bold">Web & Automation</h3>
+            <p class="text-sm text-muted mt-2 leading-relaxed">
+              Internal web applications, full-stack development and workflow automation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     EXPERIENCE
+     ========================= -->
+<section id="experience" class="bg-white border-b border-border">
+  <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+    <div class="mb-12">
+      <p class="mono text-[10px] text-blue-600 uppercase">Career</p>
+      <h2 class="text-3xl lg:text-4xl font-bold mt-2">Professional Experience</h2>
+      <p class="text-muted mt-3">
+        Hands-on experience across enterprise systems, data and web development.
+      </p>
+    </div>
+
+    <article class="experience-item border-l-2 border-blue-600 pl-6 lg:pl-8 mb-14">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-3">
+        <div>
+          <p class="mono text-[10px] text-blue-600 uppercase">Apr 2026 — July 2026</p>
+          <h3 class="text-2xl font-bold mt-2">Information System Engineering Intern</h3>
+          <p class="font-medium text-slate-600 mt-1">
+            Al-Ikhsan · KL HQ · Damansara, Selangor
+          </p>
+        </div>
+
+        <span class="bg-pale text-blue-700 px-3 py-1.5 rounded-md text-xs font-semibold w-fit">
+          LATEST ACTIVITY
+        </span>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-x-10 gap-y-6 mt-8">
+        <div>
+          <h4 class="font-semibold">SQL & Reporting</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Engineered analytical reports using raw SQL queries and Excel SQL data connections.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Business Systems</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Designed and deployed the Purchase Order (PO) Budget & MOH Budget Control Management System.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Business Intelligence</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Assisted business analytics migration from legacy Qlik Sense reporting into Power BI dashboards.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Data Engineering</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Engineered backend pipelines, notebooks, Lakehouse and warehouse structures in Microsoft Fabric.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-8">
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">SQL</span>
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">Power BI</span>
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">Microsoft Fabric</span>
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">Excel</span>
+      </div>
+    </article>
+
+    <article class="experience-item border-l-2 border-slate-300 pl-6 lg:pl-8 mb-14">
+      <div>
+        <p class="mono text-[10px] text-slate-400 uppercase">Sep 2023 — Feb 2024</p>
+        <h3 class="text-2xl font-bold mt-2">ICT & Web Systems Intern</h3>
+        <p class="font-medium text-slate-600 mt-1">
+          Pejabat Tanah Batu Pahat · Johor
+        </p>
+      </div>
+
+      <div class="space-y-5 mt-8">
+        <div>
+          <h4 class="font-semibold">Internal Case Reporting</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Built an internal web reporting application for the Penguatkuasa department to manage case reports.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Asset Tracking</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Developed an enterprise asset tracking website for hardware assets and maintenance history.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Technical Support</h4>
+          <p class="text-sm text-muted mt-2 leading-relaxed">
+            Provided technical IT assistance and infrastructure support across administrative departments.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-8">
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">Web Development</span>
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">Internal Systems</span>
+        <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">IT Support</span>
+      </div>
+    </article>
+
+    <div class="grid md:grid-cols-2 gap-8 border-t border-border pt-10">
+      <div>
+        <p class="mono text-[10px] text-slate-400">MAY 2024</p>
+        <h3 class="font-bold text-lg mt-2">Bouquet Part Timer</h3>
+        <p class="text-sm text-slate-500">Mardiyyah Hotel · Shah Alam</p>
+        <p class="text-sm text-muted mt-3">
+          Customer service and venue management for corporate events.
+        </p>
+      </div>
+
+      <div>
+        <p class="mono text-[10px] text-slate-400">FEB 2026</p>
+        <h3 class="font-bold text-lg mt-2">Warehouse Worker</h3>
+        <p class="text-sm text-slate-500">Shopee · Shah Alam</p>
+        <p class="text-sm text-muted mt-3">
+          High-volume operations, parcel organisation and logistics processing.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================
+     SKILLS + VISUAL
+     ========================= -->
+<section id="skills" class="bg-paper border-b border-border">
+  <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+    <div class="grid lg:grid-cols-12 gap-10">
+
+      <div class="lg:col-span-7">
+        <p class="mono text-[10px] text-blue-600 uppercase">Capabilities</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mt-2">Technical Expertise</h2>
+
+        <div class="bg-white border border-border rounded-xl overflow-hidden mt-8">
+
+          <div class="grid md:grid-cols-3 border-b border-border">
+            <div class="p-5 font-bold bg-slate-50">Programming</div>
+            <div class="md:col-span-2 p-5 text-sm text-muted">
+              Python · SQL · JavaScript · PHP · R · C++ · HTML5 · CSS3
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 border-b border-border">
+            <div class="p-5 font-bold bg-slate-50">Data & BI</div>
+            <div class="md:col-span-2 p-5 text-sm text-muted">
+              Microsoft Fabric · Power BI · Machine Learning · Data Analytics
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 border-b border-border">
+            <div class="p-5 font-bold bg-slate-50">Automation</div>
+            <div class="md:col-span-2 p-5 text-sm text-muted">
+              n8n Agentic AI · Workflow Automation
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 border-b border-border">
+            <div class="p-5 font-bold bg-slate-50">Database & Tools</div>
+            <div class="md:col-span-2 p-5 text-sm text-muted">
+              MySQL Workbench · Oracle APEX · Laragon
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3">
+            <div class="p-5 font-bold bg-slate-50">Professional</div>
+            <div class="md:col-span-2 p-5 text-sm text-muted">
+              Leadership · Project Management · Critical Thinking · Problem Solving · Time Management
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Technology map -->
+<div class="lg:col-span-5">
+  <div class="bg-navy rounded-2xl p-6 text-white h-full min-h-[380px] relative overflow-hidden flex flex-col justify-between">
+
+    <!-- Background Glow -->
+    <div class="absolute -right-20 -top-20 w-56 h-56 rounded-full bg-blue-600/20 blur-2xl pointer-events-none"></div>
+
+    <!-- Header Section -->
+    <div>
+      <p class="mono text-[9px] text-blue-300 uppercase tracking-widest">Technology map</p>
+      <h3 class="text-xl font-bold mt-1">Where my skills connect</h3>
+    </div>
+
+    <!-- Tech Map Container -->
+    <div class="relative my-4 w-full h-[220px]">
+
+      <!-- SVG Orthogonal Layer -->
+      <svg class="absolute inset-0 w-full h-full pointer-events-none z-0"
+           viewBox="0 0 320 220"
+           preserveAspectRatio="xMidYMid meet"
+           aria-hidden="true">
+        <defs>
+          <marker id="arrowHead"
+                  viewBox="0 0 10 10"
+                  refX="6"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#60A5FA" />
+          </marker>
+        </defs>
+
+        <!-- DATA -> SQL -->
+        <path d="M 120 20 H 55 V 65"
+              stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" fill="none"
+              marker-end="url(#arrowHead)" class="animated"></path>
+
+        <!-- DATA -> BI -->
+        <path d="M 200 20 H 265 V 65"
+              stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" fill="none"
+              marker-end="url(#arrowHead)" class="animated"></path>
+
+        <!-- SQL -> BUSINESS VALUE -->
+        <path d="M 55 125 V 170 H 115 V 195"
+              stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" fill="none"
+              marker-end="url(#arrowHead)" class="animated"></path>
+
+        <!-- BI -> BUSINESS VALUE -->
+        <path d="M 265 125 V 170 H 205 V 195"
+              stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" fill="none"
+              marker-end="url(#arrowHead)" class="animated"></path>
+      </svg>
+
+      <!-- Absolute Positioned Nodes -->
+      <div class="relative z-10 w-full h-full max-w-[320px] mx-auto">
+        <!-- DATA -->
+        <div class="absolute left-1/2 -translate-x-1/2 top-0 px-6 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-lg text-xs tracking-wider">
+          DATA
+        </div>
+
+        <!-- SQL -->
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-24 py-3 bg-slate-800/90 border border-slate-700 text-center font-bold text-white rounded-lg text-xs shadow-md">
+          SQL
+        </div>
+
+        <!-- BI -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-24 py-3 bg-slate-800/90 border border-slate-700 text-center font-bold text-white rounded-lg text-xs shadow-md">
+          BI
+        </div>
+
+        <!-- BUSINESS VALUE -->
+        <div class="absolute left-1/2 -translate-x-1/2 bottom-0 px-5 py-2.5 bg-white text-slate-900 font-bold rounded-lg shadow-xl text-xs tracking-wider whitespace-nowrap">
+          BUSINESS VALUE
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Aligned Bottom Chart & Text Footer -->
+    <div class="flex items-center justify-between border-t border-slate-800/80 pt-4 mt-2">
+      <div class="flex items-end gap-1.5 h-8">
+        <div class="bar bg-blue-300 w-2.5 h-3 rounded-t" style="animation-delay:.1s"></div>
+        <div class="bar bg-blue-400 w-2.5 h-5 rounded-t" style="animation-delay:.2s"></div>
+        <div class="bar bg-blue-500 w-2.5 h-7 rounded-t" style="animation-delay:.3s"></div>
+        <div class="bar bg-blue-600 w-2.5 h-8 rounded-t" style="animation-delay:.4s"></div>
+      </div>
+      <div class="text-xs text-slate-400 font-mono tracking-tight text-align: center;">
+        data <span class="text-blue-400">→</span> analysis <span class="text-blue-400">→</span> decision
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     EDUCATION
+     ========================= -->
+<section id="education" class="bg-white border-b border-border">
+  <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+    <div class="mb-12">
+      <p class="mono text-[10px] text-blue-600 uppercase">Academic Background</p>
+      <h2 class="text-3xl lg:text-4xl font-bold mt-2">Education & Certifications</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5 mb-12">
+
+      <div class="border border-border rounded-xl p-6">
+        <p class="mono text-[10px] text-blue-600">2023 — CURRENT</p>
+        <h3 class="font-bold text-xl mt-3">UiTM Shah Alam</h3>
+        <p class="text-sm text-muted mt-2">
+          Bachelor of Information Systems (Hons.) Intelligence System Engineering
+        </p>
+        <p class="text-sm font-semibold mt-5">
+          CGPA <span class="text-blue-600">3.48</span>
+        </p>
+      </div>
+
+      <div class="border border-border rounded-xl p-6">
+        <p class="mono text-[10px] text-blue-600">2021 — 2024</p>
+        <h3 class="font-bold text-xl mt-3">UiTM Segamat</h3>
+        <p class="text-sm text-muted mt-2">Diploma in Computer Science</p>
+        <p class="text-sm font-semibold mt-5">
+          CGPA <span class="text-blue-600">3.62</span>
+        </p>
+      </div>
+
+    </div>
+
+    <h3 class="font-bold text-xl mb-5">Certifications & Training</h3>
+
+    <div class="grid md:grid-cols-2 gap-4">
+
+      <div class="border border-border rounded-xl p-5">
+        <p class="mono text-[10px] text-slate-400">2026</p>
+        <h4 class="font-semibold mt-2">Agentic AI & n8n Automation</h4>
+        <p class="text-sm text-muted mt-2">MSU Academy</p>
+      </div>
+
+      <div class="border border-border rounded-xl p-5">
+        <p class="mono text-[10px] text-slate-400">2025</p>
+        <h4 class="font-semibold mt-2">Google Cloud Data Practitioner</h4>
+        <p class="text-sm text-muted mt-2">
+          Data ingestion, pipelines, machine learning and visualization
+        </p>
+      </div>
+
+      <div class="border border-border rounded-xl p-5">
+        <p class="mono text-[10px] text-slate-400">2023</p>
+        <h4 class="font-semibold mt-2">Oracle APEX App Development & Design</h4>
+        <p class="text-sm text-muted mt-2">
+          Application engineering and relational database design
+        </p>
+      </div>
+
+      <div class="border border-border rounded-xl p-5">
+        <p class="mono text-[10px] text-slate-400">2025</p>
+        <h4 class="font-semibold mt-2">Ericsson 5G & Emerging Tech Badges</h4>
+        <p class="text-sm text-muted mt-2">
+          5G, IoT, Edge Computing and Cloud infrastructure
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     CONTACT
+     ========================= -->
+<section class="bg-navy text-white">
+  <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-10">
+
+      <div>
+        <p class="mono text-[10px] text-blue-300 uppercase">Let's connect</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mt-3">
+          Looking for the next opportunity.
+        </h2>
+        <p class="text-slate-400 mt-3 max-w-xl">
+          Open to roles involving AI, software development, data,
+          business intelligence and information systems.
+        </p>
+      </div>
+
+      <a href="mailto:abdulqayyuum21@gmail.com"
+         class="shrink-0 bg-blue-600 hover:bg-blue-500 px-6 py-4 rounded-lg font-semibold transition">
+        Get in touch →
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-navy border-t border-white/10 text-slate-500">
+  <div class="section mx-auto px-6 lg:px-14 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs">
+    <p>© 2026 Abdul Qayyuum</p>
+    <p>Information Systems · Data · Software</p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileOverlay = document.getElementById("mobileOverlay");
+const menuButton = document.getElementById("menuButton");
+const menuIcon = document.getElementById("menuIcon");
+
+function openMobileMenu(){
+  mobileMenu.classList.add("open");
+  mobileOverlay.classList.add("show");
+  mobileMenu.setAttribute("aria-hidden","false");
+  menuButton.setAttribute("aria-expanded","true");
+  document.body.classList.add("menu-open");
+
+  menuIcon.innerHTML =
+    '<path d="M6 6l12 12M18 6L6 18"/>';
+}
+
+function closeMobileMenu(){
+  mobileMenu.classList.remove("open");
+  mobileOverlay.classList.remove("show");
+  mobileMenu.setAttribute("aria-hidden","true");
+  menuButton.setAttribute("aria-expanded","false");
+  document.body.classList.remove("menu-open");
+
+  menuIcon.innerHTML =
+    '<path d="M4 6h16M4 12h16M4 18h16"/>';
+}
+
+function toggleMobileMenu(){
+  if(mobileMenu.classList.contains("open")){
+    closeMobileMenu();
+  }else{
+    openMobileMenu();
+  }
+}
+
+/* Close drawer with Escape */
+document.addEventListener("keydown", function(event){
+  if(event.key === "Escape" && mobileMenu.classList.contains("open")){
+    closeMobileMenu();
+  }
+});
+
+/* Prevent desktop resizing from leaving the mobile drawer open */
+window.addEventListener("resize", function(){
+  if(window.innerWidth >= 1024 && mobileMenu.classList.contains("open")){
+    closeMobileMenu();
+  }
+});
+</script>
+
+</body>
+</html>

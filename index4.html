@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abdul Qayyuum — Information Systems Engineer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+    >
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: "#14213D",
+                        blue: "#2563EB",
+                        paper: "#F8FAFC",
+                        ink: "#172033",
+                        muted: "#64748B",
+                        border: "#E2E8F0",
+                        pale: "#EFF6FF"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #172033;
+            font-family: "Inter", sans-serif;
+        }
+
+        .mono {
+            font-family: "DM Mono", monospace;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 310px;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .main {
+            margin-left: 310px;
+        }
+
+        .section {
+            max-width: 1000px;
+        }
+
+        .experience-item {
+            transition: all .2s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+        }
+
+        .skill-item {
+            transition: all .15s ease;
+        }
+
+        .skill-item:hover {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        @media (max-width: 1023px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ========================================================= -->
+<!-- SIDEBAR -->
+<!-- ========================================================= -->
+
+<aside class="sidebar bg-navy text-white hidden lg:flex flex-col p-10">
+
+    <div>
+
+        <!-- Identity -->
+
+        <div class="mb-12">
+
+            <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-7">
+
+                <span class="text-xl font-bold">
+                    AQ
+                </span>
+
+            </div>
+
+            <h1 class="text-3xl font-bold tracking-tight">
+                Abdul<br>
+                Qayyuum
+            </h1>
+
+            <p class="text-blue-300 font-medium mt-4">
+                Information Systems Engineer
+            </p>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="space-y-2">
+
+            <a
+                href="#summary"
+                class="block px-4 py-3 rounded-lg bg-white/10 text-sm font-medium"
+            >
+                01 &nbsp; Profile
+            </a>
+
+            <a
+                href="#experience"
+                class="block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition"
+            >
+                02 &nbsp; Experience
+            </a>
+
+            <a
+                href="#skills"
+                class="block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition"
+            >
+                03 &nbsp; Expertise
+            </a>
+
+            <a
+                href="#education"
+                class="block px-4 py-3 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-white transition"
+            >
+                04 &nbsp; Education
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- Contact -->
+
+    <div class="mt-auto">
+
+        <div class="border-t border-white/10 pt-7">
+
+            <p class="mono text-[10px] text-slate-500 uppercase mb-4">
+                Contact
+            </p>
+
+            <a
+                href="mailto:abdulqayyuum21@gmail.com"
+                class="block text-sm text-slate-200 hover:text-blue-300 transition break-all"
+            >
+                abdulqayyuum21@gmail.com
+            </a>
+
+            <a
+                href="www.linkedin.com/in/abdul-qayyuum-9883b127b"
+                class="block text-sm text-slate-200 hover:text-blue-300 transition break-all"
+            >
+                linkedin: Abdul Qayyuum
+            </a>
+            
+
+            <p class="text-sm text-slate-400 mt-3">
+                +6017-747-1672
+            </p>
+
+            <p class="text-sm text-slate-400 mt-1">
+                Selangor, Malaysia
+            </p>
+
+        </div>
+
+            <a href="file/CV lattest.pdf" 
+                download 
+                class="mt-6 w-full  group inline-flex items-center justify-center space-x-2 px-4 py-2 bg-white border-2 border-slate-800 hover:bg-slate-800 text-slate-800 hover:text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                <svg class="w-4 h-4 stroke-red-500 group-hover:stroke-white transition-colors duration-200" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://w3.org">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+                </svg>
+                <span>Download CV</span>
+            </a>
+
+    </div>
+
+</aside>
+
+
+<!-- ========================================================= -->
+<!-- MOBILE HEADER -->
+<!-- ========================================================= -->
+
+<header class="lg:hidden bg-navy text-white px-6 py-5">
+
+    <div class="flex items-center justify-between">
+
+        <div>
+
+            <p class="font-bold">
+                Abdul Qayyuum
+            </p>
+
+            <p class="text-xs text-blue-300 mt-1">
+                Information Systems Engineer
+            </p>
+
+        </div>
+
+        <a
+            href="file/CV lattest.pdf"
+            download
+            class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-semibold"
+        >
+            CV ↓
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================================= -->
+<!-- MAIN -->
+<!-- ========================================================= -->
+
+<main class="main">
+
+
+<!-- ========================================================= -->
+<!-- PROFILE -->
+<!-- ========================================================= -->
+
+<section
+    id="summary"
+    class="bg-white border-b border-border"
+>
+
+    <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+
+            <span class="mono text-[11px] text-slate-500 uppercase">
+                Available for opportunities
+            </span>
+
+        </div>
+
+
+        <h2 class="text-4xl lg:text-6xl font-bold tracking-tight text-navy max-w-4xl">
+
+            Information systems,
+            <span class="text-blue-600">
+                data
+            </span>
+            and software —
+            built for real business problems.
+
+        </h2>
+
+
+        <p class="mt-7 text-lg text-muted leading-relaxed max-w-3xl">
+
+            Technology-focused Information Systems professional with
+            hands-on experience in enterprise SQL reporting, Power BI,
+            Microsoft Fabric, business systems, automation and web
+            application development.
+
+        </p>
+
+
+        <!-- Recruiter summary -->
+
+        <div class="grid md:grid-cols-3 gap-5 mt-12">
+
+            <div class="bg-paper border border-border rounded-xl p-5">
+
+                <p class="mono text-[10px] text-slate-400 uppercase">
+                    Latest Acticity
+                </p>
+
+                <p class="font-semibold mt-3">
+                    Database & AI Engineering Intern
+                </p>
+
+                <p class="text-sm text-muted mt-1">
+                    Al-Ikhsan · KL HQ
+                </p>
+
+            </div>
+
+
+            <div class="bg-paper border border-border rounded-xl p-5">
+
+                <p class="mono text-[10px] text-slate-400 uppercase">
+                    Focus
+                </p>
+
+                <p class="font-semibold mt-3">
+                    Data & Business Intelligence
+                </p>
+
+                <p class="text-sm text-muted mt-1">
+                    SQL · Power BI · Microsoft Fabric
+                </p>
+
+            </div>
+
+
+            <div class="bg-paper border border-border rounded-xl p-5">
+
+                <p class="mono text-[10px] text-slate-400 uppercase">
+                    Education
+                </p>
+
+                <p class="font-semibold mt-3">
+                    University Teknologi MARA
+                </p>
+
+                <p class="text-sm text-muted mt-1">
+                    Intelligence System Engineering
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- CORE EXPERTISE -->
+<!-- ========================================================= -->
+
+<section class="bg-paper border-b border-border">
+
+    <div class="section mx-auto px-6 lg:px-14 py-14">
+
+        <div class="flex items-end justify-between mb-8">
+
+            <div>
+
+                <p class="mono text-[10px] text-blue-600 uppercase">
+                    At a glance
+                </p>
+
+                <h2 class="text-2xl font-bold mt-2">
+                    Core Expertise
+                </h2>
+
+            </div>
+
+            <span class="hidden sm:block text-xs text-slate-400">
+                What I can contribute
+            </span>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+            <!-- Expertise -->
+
+            <div class="bg-white border border-border rounded-xl p-6 skill-item">
+
+                <div class="flex items-start gap-4">
+
+                    <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold">
+                            Business Intelligence
+                        </h3>
+
+                        <p class="text-sm text-muted mt-2 leading-relaxed">
+                            Business reporting, dashboard development
+                            and analytics migration using Power BI.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-white border border-border rounded-xl p-6 skill-item">
+
+                <div class="flex items-start gap-4">
+
+                    <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold">
+                            Data Engineering
+                        </h3>
+
+                        <p class="text-sm text-muted mt-2 leading-relaxed">
+                            Data pipelines, notebooks, Lakehouse and
+                            warehouse structures using Microsoft Fabric.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-white border border-border rounded-xl p-6 skill-item">
+
+                <div class="flex items-start gap-4">
+
+                    <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold">
+                            Business Systems
+                        </h3>
+
+                        <p class="text-sm text-muted mt-2 leading-relaxed">
+                            Internal systems for budget control,
+                            reporting, asset management and operations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-white border border-border rounded-xl p-6 skill-item">
+
+                <div class="flex items-start gap-4">
+
+                    <div class="w-10 h-10 rounded-lg bg-pale text-blue-600 flex items-center justify-center font-bold">
+                        04
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold">
+                            Web & Automation
+                        </h3>
+
+                        <p class="text-sm text-muted mt-2 leading-relaxed">
+                            Internal web applications, full-stack
+                            development and workflow automation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- EXPERIENCE -->
+<!-- ========================================================= -->
+
+<section
+    id="experience"
+    class="bg-white border-b border-border"
+>
+
+    <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+        <div class="mb-12">
+
+            <p class="mono text-[10px] text-blue-600 uppercase">
+                Career
+            </p>
+
+            <h2 class="text-3xl lg:text-4xl font-bold mt-2">
+                Professional Experience
+            </h2>
+
+            <p class="text-muted mt-3">
+                Hands-on experience across enterprise systems,
+                data and web development.
+            </p>
+
+        </div>
+
+
+        <!-- JOB 1 -->
+
+        <article class="experience-item border-l-2 border-blue-600 pl-6 lg:pl-8 mb-14">
+
+            <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-3">
+
+                <div>
+
+                    <p class="mono text-[10px] text-blue-600 uppercase">
+                        Apr 2026 — July 2026
+                    </p>
+
+                    <h3 class="text-2xl font-bold mt-2">
+                        Information System Engineering Intern
+                    </h3>
+
+                    <p class="font-medium text-slate-600 mt-1">
+                        Al-Ikhsan · KL HQ · Damansara, Selangor
+                    </p>
+
+                </div>
+
+                <span class="bg-pale text-blue-700 px-3 py-1.5 rounded-md text-xs font-semibold w-fit">
+                    July 2026
+                </span>
+
+            </div>
+
+
+            <div class="grid lg:grid-cols-2 gap-x-10 gap-y-6 mt-8">
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        SQL & Reporting
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Engineered analytical reports using raw SQL
+                        queries and Excel SQL data connections.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Business Systems
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Designed and deployed the Purchase Order (PO)
+                        Budget & MOH Budget Control Management System.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Business Intelligence
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Assisted business analytics migration from
+                        legacy Qlik Sense reporting into Power BI dashboards.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Data Engineering
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Engineered backend pipelines, notebooks,
+                        Lakehouse and warehouse structures in
+                        Microsoft Fabric.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex flex-wrap gap-2 mt-8">
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    SQL
+                </span>
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    Power BI
+                </span>
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    Microsoft Fabric
+                </span>
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    Excel
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- JOB 2 -->
+
+        <article class="experience-item border-l-2 border-slate-300 pl-6 lg:pl-8 mb-14">
+
+            <div>
+
+                <p class="mono text-[10px] text-slate-400 uppercase">
+                    Sep 2023 — Feb 2024
+                </p>
+
+                <h3 class="text-2xl font-bold mt-2">
+                    ICT & Web Systems Intern
+                </h3>
+
+                <p class="font-medium text-slate-600 mt-1">
+                    Pejabat Tanah Batu Pahat · Johor
+                </p>
+
+            </div>
+
+
+            <div class="space-y-5 mt-8">
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Internal Case Reporting
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Built an internal web reporting application
+                        for the Penguatkuasa department to manage
+                        case reports.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Asset Tracking
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Developed an enterprise asset tracking website
+                        for hardware assets and maintenance history.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold">
+                        Technical Support
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2 leading-relaxed">
+                        Provided technical IT assistance and infrastructure
+                        support across administrative departments.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex flex-wrap gap-2 mt-8">
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    Web Development
+                </span>
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    Internal Systems
+                </span>
+
+                <span class="bg-paper border border-border px-3 py-1.5 rounded-md text-xs">
+                    IT Support
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- OTHER EXPERIENCE -->
+
+        <div class="grid md:grid-cols-2 gap-8 border-t border-border pt-10">
+
+            <div>
+
+                <p class="mono text-[10px] text-slate-400">
+                    MAY 2024
+                </p>
+
+                <h3 class="font-bold text-lg mt-2">
+                    Bouquet Part Timer
+                </h3>
+
+                <p class="text-sm text-slate-500">
+                    Mardiyyah Hotel · Shah Alam
+                </p>
+
+                <p class="text-sm text-muted mt-3">
+                    Customer service and venue management
+                    for corporate events.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p class="mono text-[10px] text-slate-400">
+                    FEB 2026
+                </p>
+
+                <h3 class="font-bold text-lg mt-2">
+                    Warehouse Worker
+                </h3>
+
+                <p class="text-sm text-slate-500">
+                    Shopee · Shah Alam
+                </p>
+
+                <p class="text-sm text-muted mt-3">
+                    High-volume operations, parcel organisation
+                    and logistics processing.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- SKILLS -->
+<!-- ========================================================= -->
+
+<section
+    id="skills"
+    class="bg-paper border-b border-border"
+>
+
+    <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+        <div class="mb-12">
+
+            <p class="mono text-[10px] text-blue-600 uppercase">
+                Capabilities
+            </p>
+
+            <h2 class="text-3xl lg:text-4xl font-bold mt-2">
+                Technical Expertise
+            </h2>
+
+        </div>
+
+
+        <div class="bg-white border border-border rounded-xl overflow-hidden">
+
+            <!-- Row -->
+
+            <div class="grid md:grid-cols-3 border-b border-border">
+
+                <div class="p-6 font-bold bg-slate-50">
+                    Programming
+                </div>
+
+                <div class="md:col-span-2 p-6 text-sm text-muted">
+                    Python · SQL · JavaScript · PHP · R · C++ · HTML5 · CSS3
+                </div>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-3 border-b border-border">
+
+                <div class="p-6 font-bold bg-slate-50">
+                    Data & BI
+                </div>
+
+                <div class="md:col-span-2 p-6 text-sm text-muted">
+                    Microsoft Fabric · Power BI · Machine Learning
+                    · Data Analytics
+                </div>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-3 border-b border-border">
+
+                <div class="p-6 font-bold bg-slate-50">
+                    Automation
+                </div>
+
+                <div class="md:col-span-2 p-6 text-sm text-muted">
+                    n8n Agentic AI · Workflow Automation
+                </div>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-3 border-b border-border">
+
+                <div class="p-6 font-bold bg-slate-50">
+                    Database & Tools
+                </div>
+
+                <div class="md:col-span-2 p-6 text-sm text-muted">
+                    MySQL Workbench · Oracle APEX · Laragon
+                </div>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-3">
+
+                <div class="p-6 font-bold bg-slate-50">
+                    Professional
+                </div>
+
+                <div class="md:col-span-2 p-6 text-sm text-muted">
+                    Leadership · Project Management · Critical Thinking
+                    · Problem Solving · Time Management
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- EDUCATION -->
+<!-- ========================================================= -->
+
+<section
+    id="education"
+    class="bg-white border-b border-border"
+>
+
+    <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+        <div class="mb-12">
+
+            <p class="mono text-[10px] text-blue-600 uppercase">
+                Academic Background
+            </p>
+
+            <h2 class="text-3xl lg:text-4xl font-bold mt-2">
+                Education & Certifications
+            </h2>
+
+        </div>
+
+
+        <!-- Education -->
+
+        <div class="grid md:grid-cols-2 gap-5 mb-12">
+
+            <div class="border border-border rounded-xl p-6">
+
+                <p class="mono text-[10px] text-blue-600">
+                    2023 — CURRENT
+                </p>
+
+                <h3 class="font-bold text-xl mt-3">
+                    UiTM Shah Alam
+                </h3>
+
+                <p class="text-sm text-muted mt-2">
+                    Bachelor of Information Systems (Hons.)
+                    Intelligence System Engineering
+                </p>
+
+                <p class="text-sm font-semibold mt-5">
+                    CGPA <span class="text-blue-600">3.48</span>
+                </p>
+
+            </div>
+
+
+            <div class="border border-border rounded-xl p-6">
+
+                <p class="mono text-[10px] text-blue-600">
+                    2021 — 2024
+                </p>
+
+                <h3 class="font-bold text-xl mt-3">
+                    UiTM Segamat
+                </h3>
+
+                <p class="text-sm text-muted mt-2">
+                    Diploma in Computer Science
+                </p>
+
+                <p class="text-sm font-semibold mt-5">
+                    CGPA <span class="text-blue-600">3.62</span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Certifications -->
+
+        <div>
+
+            <h3 class="font-bold text-xl mb-5">
+                Certifications & Training
+            </h3>
+
+
+            <div class="grid md:grid-cols-2 gap-4">
+
+                <div class="border border-border rounded-xl p-5">
+
+                    <p class="mono text-[10px] text-slate-400">
+                        2026
+                    </p>
+
+                    <h4 class="font-semibold mt-2">
+                        Agentic AI & n8n Automation
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2">
+                        MSU Academy
+                    </p>
+
+                </div>
+
+
+                <div class="border border-border rounded-xl p-5">
+
+                    <p class="mono text-[10px] text-slate-400">
+                        2025
+                    </p>
+
+                    <h4 class="font-semibold mt-2">
+                        Google Cloud Data Practitioner
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2">
+                        Data ingestion, pipelines, machine learning
+                        and visualization
+                    </p>
+
+                </div>
+
+
+                <div class="border border-border rounded-xl p-5">
+
+                    <p class="mono text-[10px] text-slate-400">
+                        2023
+                    </p>
+
+                    <h4 class="font-semibold mt-2">
+                        Oracle APEX App Development & Design
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2">
+                        Application engineering and relational
+                        database design
+                    </p>
+
+                </div>
+
+
+                <div class="border border-border rounded-xl p-5">
+
+                    <p class="mono text-[10px] text-slate-400">
+                        2025
+                    </p>
+
+                    <h4 class="font-semibold mt-2">
+                        Ericsson 5G & Emerging Tech Badges
+                    </h4>
+
+                    <p class="text-sm text-muted mt-2">
+                        5G, IoT, Edge Computing and Cloud infrastructure
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FINAL CTA -->
+<!-- ========================================================= -->
+
+<section class="bg-navy text-white">
+
+    <div class="section mx-auto px-6 lg:px-14 py-16 lg:py-20">
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-10">
+
+            <div>
+
+                <p class="mono text-[10px] text-blue-300 uppercase">
+                    Let's connect
+                </p>
+
+                <h2 class="text-3xl lg:text-4xl font-bold mt-3">
+                    Looking for the next opportunity.
+                </h2>
+
+                <p class="text-slate-400 mt-3 max-w-xl">
+                    Open to roles involving AI, software development,
+                    data, business intelligence and information systems.
+                </p>
+
+            </div>
+
+
+            <a
+                href="mailto:abdulqayyuum21@gmail.com"
+                class="shrink-0 bg-blue-600 hover:bg-blue-500 px-6 py-4 rounded-lg font-semibold transition"
+            >
+                Get in touch →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-navy border-t border-white/10 text-slate-500">
+
+    <div class="section mx-auto px-6 lg:px-14 py-6">
+
+        <div class="flex flex-col sm:flex-row justify-between gap-3 text-xs">
+
+            <p>
+                © 2026 Abdul Qayyuum
+            </p>
+
+            <p>
+                Information Systems · Data · Software
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</main>
+
+</body>
+</html>
