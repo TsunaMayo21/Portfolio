@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Qayyuum — AI Engineer & Data Systems Developer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+    <script src="style.css"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, and Caveat for the handwritten sticker -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        handwriting: ['"Caveat"', 'cursive'],
+                    },
+                    colors: {
+                        canvas: '#FFF2FA',
+                        card: '#FFFFFF',
+                        surface: '#F7E3F3',
+                        plum: '#5A2A66',
+                        lavender: '#C690C7',
+                        royal: '#8A4A8F',
+                        royalHover: '#5A2A66',
+                        ink: '#2B0F3A',
+                        muted: '#5A2A66'
+                    },
+                    boxShadow: {
+                        'sticker': '0 16px 32px -8px rgba(43, 15, 58, 0.14), 0 4px 12px -2px rgba(138, 74, 143, 0.12)',
+                        'sticker-hover': '0 24px 42px -10px rgba(43, 15, 58, 0.22), 0 8px 18px -4px rgba(138, 74, 143, 0.18)',
+                        'pill': '0 4px 16px rgba(43, 15, 58, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html,
+        body {
+            background-color: #FFF2FA;
+            color: #2B0F3A;
+            max-width: 100%;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Tactile Sticker Base Styles & Smooth Physics */
+        .tactile-sticker {
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            user-select: none;
+            touch-action: none;
+        }
+
+        .tactile-sticker:hover {
+            z-index: 30;
+        }
+
+        /* Die-cut sticker border & subtle drop shadow for illustrated stickers */
+        .diecut-sticker {
+            filter: drop-shadow(0 0 2px #FFFFFF) drop-shadow(0 0 2px #FFFFFF) drop-shadow(0 12px 20px rgba(43, 15, 58, 0.18));
+        }
+
+        /* Subtle translucent masking tape effect adapted for blush & orchid theme */
+        .tape-strip {
+            background: rgba(198, 144, 199, 0.55);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 2px 6px rgba(43, 15, 58, 0.12);
+            border-left: 1px dashed rgba(43, 15, 58, 0.18);
+            border-right: 1px dashed rgba(43, 15, 58, 0.18);
+        }
+
+        /* Subtle dot grid using soft orchid lavender */
+        .bg-dot-grid {
+            background-image: radial-gradient(#C690C7 1.25px, transparent 1.25px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-6px) rotate(var(--rot, 0deg)); }
+        }
+
+        @keyframes spinDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin-disc {
+            animation: spinDisc 3s linear infinite;
+            transform-origin: center center;
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        #vinyl-disc-rotor.animate-spin-disc,
+        #mobile-vinyl-icon.animate-spin-disc {
+            animation: spinDisc 3s linear infinite;
+            transform-origin: center center;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#C690C7] selection:text-[#2B0F3A]">
+
+    <!-- Toast Notification for Clipboard / Actions -->
+    <div id="toast" class="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex justify-center sm:block">
+        <div class="bg-[#2B0F3A] border border-[#8A4A8F] text-[#FFF2FA] text-xs sm:text-sm font-medium px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 max-w-full">
+            <span class="w-2 h-2 rounded-full bg-[#C690C7] shrink-0"></span>
+            <span id="toast-message" class="truncate">Copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Top Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 px-2.5 sm:px-8 py-2.5 sm:py-4">
+        <div class="relative max-w-6xl mx-auto flex items-center justify-between gap-1.5 min-h-[2.25rem]">
+            <!-- Left Brand Mark (hidden on very narrow mobile embeds so pill nav never clips) -->
+            <a href="#home" class="hidden sm:flex relative z-10 items-center gap-2.5 group shrink-0">
+                <div class="w-8 h-8 rounded-xl bg-[#2B0F3A] border border-[#5A2A66] text-[#FFF2FA] flex items-center justify-center font-mono font-bold text-sm shadow-sm group-hover:bg-[#8A4A8F] transition-colors">
+                    Q
+                </div>
+                <span class="font-semibold text-sm tracking-tight text-[#2B0F3A] hidden md:inline">Abdul Qayyuum</span>
+            </a>
+
+            <!-- Center Pill Navigation -->
+            <nav aria-label="Primary Navigation" class="mx-auto md:mx-0 md:absolute md:left-1/2 md:-translate-x-1/2 bg-[#FFFFFF]/95 backdrop-blur-md border border-[#C690C7]/60 shadow-pill rounded-full px-1 py-1 flex items-center justify-center gap-0.5 sm:gap-1 max-w-full">
+                <a href="#home" class="nav-link px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-[#F7E3F3] text-[#2B0F3A] transition-colors">Home</a>
+                <a href="#work" class="nav-link px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-[#5A2A66] hover:text-[#2B0F3A] transition-colors">Work</a>
+                <a href="#experience" class="nav-link px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-[#5A2A66] hover:text-[#2B0F3A] transition-colors">Journey</a>
+                <a href="#stack" class="nav-link px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-[#5A2A66] hover:text-[#2B0F3A] transition-colors">Stack</a>
+            </nav>
+
+            <!-- Right Quick Social & Status Actions (shown on sm+ so mobile header stays compact) -->
+            <div class="hidden sm:flex relative z-10 items-center gap-2 shrink-0">
+                <a href="https://www.linkedin.com/in/abdul-qayyuum-9883b127b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#C690C7]/60 shadow-pill flex items-center justify-center text-[#5A2A66] hover:text-[#2B0F3A] hover:border-[#8A4A8F] transition-all">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+                <button type="button" onclick="copyText('abdulqayyuum21@gmail.com', 'Email copied: abdulqayyuum21@gmail.com')" aria-label="Copy Email" class="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#C690C7]/60 shadow-pill flex items-center justify-center text-[#5A2A66] hover:text-[#2B0F3A] hover:border-[#8A4A8F] transition-all cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </button>
+                <a href="https://landing-page-freelance.pages.dev/" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-1.5 bg-[#F7E3F3] border border-[#C690C7] text-[#2B0F3A] text-xs font-semibold px-3 py-1.5 rounded-full hover:bg-[#C690C7]/40 transition-colors shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#8A4A8F] animate-pulse"></span>
+                    Freelance
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (Light Blush-White Desk with Orchid & Aubergine Stickers) -->
+    <section id="home" class="relative min-h-screen flex flex-col items-center justify-center pt-20 sm:pt-24 pb-16 px-4 bg-dot-grid overflow-hidden">
+        <!-- Soft radial blush/orchid wash behind hero center -->
+        <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[340px] bg-[#C690C7]/25 blur-[110px] rounded-full"></div>
+
+        <!-- Desktop Floating Interactive Stickers (Positioned around the centerpiece) -->
+        <div class="hidden lg:block pointer-events-none fixed inset-0 max-w-7xl mx-auto z-10" id="desk-stage">
+
+            <!-- 1. Top-Left: Aubergine Code Hardware Sticker -->
+            <div data-draggable style="--rot: -10deg; top: 15%; left: 6%;" class="tactile-sticker pointer-events-auto absolute w-48 bg-[#2B0F3A] rounded-2xl p-3.5 shadow-sticker border border-[#5A2A66] transform -rotate-10 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex gap-1">
+                        <span class="w-2 h-2 rounded-full bg-[#C690C7]"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A4A8F]"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#FFF2FA]"></span>
+                    </div>
+                    <span class="text-[9px] font-mono text-[#C690C7]">woa_svm.py</span>
+                </div>
+                <div class="bg-[#190723] rounded-lg p-2.5 font-mono text-[10px] leading-relaxed text-[#FFF2FA] border border-[#5A2A66]/60">
+                    <p class="text-[#C690C7]"># Hybrid Gold Model</p>
+                    <p>acc_test = <span class="text-[#C690C7] font-semibold">0.9604</span></p>
+                    <p>acc_train = <span class="text-[#FFF2FA]">0.9912</span></p>
+                    <p class="text-[#C690C7]/80 mt-1">Status: Converged ✓</p>
+                </div>
+            </div>
+
+            <!-- 2. Top-Left-Inner: Orchid / Violet Accuracy Badge -->
+            <div data-draggable style="--rot: 6deg; top: 18%; left: 24%;" class="tactile-sticker pointer-events-auto absolute bg-[#FFFFFF] p-2.5 rounded-2xl shadow-sticker border border-[#C690C7] transform rotate-6 hover:scale-110 cursor-grab active:cursor-grabbing">
+                <div class="w-16 h-16 rounded-xl bg-[#F7E3F3] flex flex-col items-center justify-center border border-[#C690C7]/60">
+                    <svg class="w-9 h-9 text-[#8A4A8F]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 3h3v3h10V3h3v7h1v6h-2v3h-3v2H8v-2H5v-3H3v-6h1V3zm4 8v2h2v-2H8zm6 0v2h2v-2h-2zm-4 4v2h4v-2h-4z"/>
+                    </svg>
+                    <span class="text-[9px] font-mono font-bold text-[#2B0F3A] mt-0.5">96% ACC</span>
+                </div>
+            </div>
+
+            <!-- 3. Top-Right-Inner: Classic "HELLO my name is AI Engineer" Sticker in Violet & Blush -->
+            <div data-draggable style="--rot: 7deg; top: 14%; right: 22%;" class="tactile-sticker pointer-events-auto absolute w-44 bg-[#8A4A8F] rounded-2xl p-1.5 shadow-sticker border border-[#5A2A66] transform rotate-6 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="text-center text-[#FFF2FA] pt-1 pb-1.5">
+                    <div class="text-[11px] font-extrabold tracking-widest uppercase leading-none">HELLO</div>
+                    <div class="text-[8px] font-medium tracking-wider opacity-90">my name is</div>
+                </div>
+                <div class="bg-[#FFFFFF] rounded-xl py-2.5 px-3 text-center shadow-inner">
+                    <span class="font-handwriting text-2xl font-bold text-[#2B0F3A] block -rotate-2">Abdul Qayyuum</span>
+                </div>
+            </div>
+
+            <!-- 4. Top-Right: Retro Orchid / Blush Data Terminal Monitor -->
+            <div data-draggable style="--rot: -6deg; top: 17%; right: 5%;" class="tactile-sticker pointer-events-auto absolute w-44 bg-[#F7E3F3] rounded-2xl p-3 shadow-sticker border border-[#C690C7] transform -rotate-6 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="bg-[#2B0F3A] rounded-xl p-2.5 border border-[#5A2A66] shadow-inner">
+                    <div class="text-[9px] font-mono text-[#C690C7] leading-tight">
+                        <p class="text-[#FFF2FA] font-semibold">MS FABRIC PIPELINE</p>
+                        <p class="mt-1 text-[#C690C7]">&gt; Lakehouse Sync: OK</p>
+                        <p class="text-[#C690C7]">&gt; Power BI: 80% Live</p>
+                        <p class="text-[#FFF2FA]/75 mt-1 font-semibold">Al-Ikhsan HQ BI</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-2 px-1">
+                    <div class="w-8 h-1 bg-[#C690C7] rounded-full"></div>
+                    <div class="w-2 h-2 rounded-full bg-[#8A4A8F]"></div>
+                </div>
+            </div>
+
+            <!-- 5. Middle-Left: Taped Polaroid Card (UiTM Shah Alam) -->
+            <div data-draggable style="--rot: -8deg; top: 47%; left: 7%;" class="tactile-sticker pointer-events-auto absolute w-40 bg-[#FFFFFF] p-2.5 pb-4 rounded-xl shadow-sticker border border-[#C690C7]/60 transform -rotate-8 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="tape-strip w-14 h-4 absolute -top-2 left-1/2 -translate-x-1/2 rotate-2"></div>
+                <div class="w-full h-28 rounded-lg bg-gradient-to-br from-[#8A4A8F] via-[#5A2A66] to-[#2B0F3A] p-3 flex flex-col justify-between text-[#FFF2FA] overflow-hidden relative">
+                    <span class="text-[9px] font-mono uppercase tracking-wider bg-[#FFF2FA]/15 backdrop-blur-sm px-1.5 py-0.5 rounded w-fit text-[#FFF2FA]">B.Sc. (Hons)</span>
+                    <div>
+                        <p class="text-xs font-bold leading-snug">Intelligent Systems Eng.</p>
+                        <p class="text-[10px] text-[#C690C7]">CGPA 3.48 • UiTM</p>
+                    </div>
+                </div>
+                <p class="font-handwriting text-base text-[#5A2A66] text-center mt-2 leading-none">Class of 2026 🎓</p>
+            </div>
+
+            <!-- 6. Middle-Right: Aubergine Lanyard / ID Badge Card -->
+            <div data-draggable style="--rot: 8deg; top: 46%; right: 7%;" class="tactile-sticker pointer-events-auto absolute w-40 bg-[#2B0F3A] text-[#FFF2FA] rounded-2xl p-3.5 shadow-sticker border border-[#5A2A66] transform rotate-8 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="w-6 h-5 bg-[#8A4A8F] rounded-t-md mx-auto -mt-6 mb-2 border-x-2 border-t-2 border-[#C690C7] flex items-center justify-center">
+                    <div class="w-2.5 h-1 bg-[#2B0F3A] rounded-full"></div>
+                </div>
+                <div class="flex items-center justify-between text-[9px] font-mono text-[#C690C7] mb-2">
+                    <span>INTERN PASS</span>
+                    <span class="text-[#FFF2FA]">● ACTIVE</span>
+                </div>
+                <p class="text-sm font-bold tracking-tight">Al-Ikhsan HQ</p>
+                <p class="text-[11px] text-[#C690C7] mt-0.5">IS Engineering & BI</p>
+                <div class="mt-3 pt-2 border-t border-[#5A2A66]/60 flex items-center justify-between text-[9px] font-mono text-[#FFF2FA]/70">
+                    <span>SQL • FABRIC</span>
+                    <span>KL / SEL</span>
+                </div>
+            </div>
+
+            <!-- 7. Bottom-Left: Taped Sticky Note Card (Gemini Receipt Scanner) -->
+            <div data-draggable style="--rot: -4deg; bottom: 11%; left: 19%;" class="tactile-sticker pointer-events-auto absolute w-48 bg-[#FFFFFF] rounded-xl p-3.5 shadow-sticker border border-[#C690C7]/70 transform -rotate-3 hover:scale-105 cursor-grab active:cursor-grabbing">
+                <div class="tape-strip w-16 h-4 absolute -top-2 left-1/2 -translate-x-1/2 -rotate-1"></div>
+                <div class="flex items-center gap-1.5 text-[10px] font-mono text-[#8A4A8F] font-semibold mb-1">
+                    <span>✦ GEMINI API + MONGODB</span>
+                </div>
+                <p class="text-xs font-bold text-[#2B0F3A]">AI Finance Manager</p>
+                <p class="text-[11px] text-[#5A2A66] mt-0.5 leading-snug">Automated OCR receipt parsing &amp; expense impact tracking.</p>
+            </div>
+
+            <!-- 8. Bottom-Right: Crisp Tech / Automation Node Sticker -->
+            <div data-draggable style="--rot: 5deg; bottom: 12%; right: 18%;" class="tactile-sticker pointer-events-auto absolute bg-[#FFFFFF] rounded-2xl px-4 py-3 shadow-sticker border border-[#C690C7]/70 transform rotate-3 hover:scale-105 cursor-grab active:cursor-grabbing flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-[#F7E3F3] text-[#8A4A8F] flex items-center justify-center shrink-0 border border-[#C690C7]/60">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-[#2B0F3A]">n8n &amp; Cloud Workflows</p>
+                    <p class="text-[11px] text-[#5A2A66]">Agentic AI • GCP • 5G/IoT</p>
+                </div>
+            </div>
+
+            <!-- 9. Music Vinyl Sticker (Click to toggle spinning + audio loop, drag to move) -->
+            <div id="vinyl-sticker" data-draggable data-vinyl-toggle style="--rot: -10deg; top: 73%; left: 6%;" class="tactile-sticker diecut-sticker pointer-events-auto absolute w-24 h-24 rounded-full bg-[#FFFFFF] p-1.5 border-2 border-[#2B0F3A]/15 transform -rotate-10 hover:scale-110 cursor-pointer active:cursor-grabbing flex items-center justify-center" title="Click to play/pause music • Drag to move">
+                <div id="vinyl-disc-rotor" class="w-full h-full rounded-full flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="56" fill="#2B0F3A"/>
+                        <circle cx="60" cy="60" r="46" fill="none" stroke="#5A2A66" stroke-width="1.5" stroke-dasharray="10 6"/>
+                        <circle cx="60" cy="60" r="36" fill="none" stroke="#8A4A8F" stroke-width="1.5" stroke-dasharray="14 8"/>
+                        <circle cx="60" cy="60" r="26" fill="none" stroke="#5A2A66" stroke-width="1.5" stroke-dasharray="8 6"/>
+                        <path d="M 24 22 A 52 52 0 0 1 54 10" fill="none" stroke="#C690C7" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M 66 110 A 52 52 0 0 1 96 98" fill="none" stroke="#C690C7" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="60" cy="60" r="19" fill="#C690C7" stroke="#2B0F3A" stroke-width="2"/>
+                        <circle cx="60" cy="60" r="5" fill="#2B0F3A"/>
+                    </svg>
+                </div>
+                <span id="vinyl-status-badge" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-[#8A4A8F] text-[#FFF2FA] text-[9px] font-mono font-bold shadow-sm whitespace-nowrap">
+                    ♪ PLAYING
+                </span>
+            </div>
+
+            <!-- 10. Movie Clapperboard Sticker -->
+            <div data-draggable style="--rot: 10deg; top: 72%; right: 6%;" class="tactile-sticker diecut-sticker pointer-events-auto absolute w-28 bg-[#FFFFFF] rounded-2xl p-2 border-2 border-[#2B0F3A]/15 transform rotate-12 hover:scale-110 cursor-grab active:cursor-grabbing" title="Weekend cinema & sci-fi">
+                <svg class="w-full h-auto" viewBox="0 0 140 118">
+                    <g transform="rotate(-11 22 44)">
+                        <rect x="20" y="24" width="102" height="18" rx="3" fill="#2B0F3A"/>
+                        <polygon points="36,24 48,24 41,42 29,42" fill="#FFF2FA"/>
+                        <polygon points="60,24 72,24 65,42 53,42" fill="#FFF2FA"/>
+                        <polygon points="84,24 96,24 89,42 77,42" fill="#FFF2FA"/>
+                        <polygon points="108,24 118,24 112,42 101,42" fill="#FFF2FA"/>
+                    </g>
+                    <rect x="20" y="42" width="102" height="16" rx="2" fill="#2B0F3A"/>
+                    <polygon points="36,42 48,42 42,58 30,58" fill="#FFF2FA"/>
+                    <polygon points="60,42 72,42 66,58 54,58" fill="#FFF2FA"/>
+                    <polygon points="84,42 96,42 90,58 78,58" fill="#FFF2FA"/>
+                    <polygon points="108,42 118,42 113,58 102,58" fill="#FFF2FA"/>
+                    <rect x="20" y="58" width="102" height="50" rx="5" fill="#2B0F3A"/>
+                    <line x1="25" y1="73" x2="117" y2="73" stroke="#C690C7" stroke-width="1.2"/>
+                    <line x1="25" y1="90" x2="117" y2="90" stroke="#C690C7" stroke-width="1.2"/>
+                    <line x1="56" y1="58" x2="56" y2="90" stroke="#C690C7" stroke-width="1.2"/>
+                    <line x1="88" y1="58" x2="88" y2="90" stroke="#C690C7" stroke-width="1.2"/>
+                    <path d="M16 24 H34 A12 12 0 0 1 46 36 V58 H16 Z" fill="#5A2A66" stroke="#C690C7" stroke-width="1.5"/>
+                    <circle cx="24" cy="32" r="2.5" fill="#FFF2FA"/>
+                    <circle cx="24" cy="51" r="2.5" fill="#FFF2FA"/>
+                    <circle cx="39" cy="51" r="2.5" fill="#FFF2FA"/>
+                    <text x="60" y="69" fill="#FFF2FA" font-size="6.5" font-family="monospace" font-weight="bold">SCENE 26</text>
+                    <text x="60" y="102" fill="#C690C7" font-size="6.5" font-family="monospace">FILM &amp; SCI-FI</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Central Hero Typography & CTAs -->
+        <div class="relative z-20 w-full max-w-2xl mx-auto flex flex-col items-center text-center">
+            <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C690C7] shadow-pill text-[9px] sm:text-[11px] font-mono font-medium text-[#5A2A66] mb-5 sm:mb-6 max-w-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#8A4A8F] shrink-0"></span>
+                <span class="truncate">AI ENGINEER • DATA SCIENCE • WEB</span>
+            </div>
+
+            <h1 class="text-[2.15rem] sm:text-5xl md:text-[3.5rem] font-extrabold tracking-tight text-[#2B0F3A] leading-[1.14]">
+                I'm Qyum. I build<br>
+                <span class="text-[#8A4A8F]">practical AI systems</span><br>
+                that actually get used.
+            </h1>
+
+            <p class="mt-4 sm:mt-5 text-xs sm:text-sm font-medium text-[#5A2A66] flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#8A4A8F] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                <span>Kuala Lumpur / Selangor, Malaysia</span>
+            </p>
+
+            <div class="mt-6 sm:mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 w-full">
+                <a href="#work" class="inline-flex items-center justify-center gap-2 bg-[#8A4A8F] hover:bg-[#5A2A66] text-[#FFF2FA] text-xs sm:text-sm font-semibold px-5 sm:px-6 py-3 rounded-full shadow-lg shadow-[#8A4A8F]/25 transition-all hover:-translate-y-0.5">
+                    Explore my work
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </a>
+                <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-[#FFFFFF] hover:bg-[#F7E3F3] text-[#2B0F3A] border border-[#C690C7] text-xs sm:text-sm font-semibold px-5 sm:px-6 py-3 rounded-full shadow-pill transition-all hover:-translate-y-0.5">
+                    Get in touch
+                </a>
+            </div>
+
+            <!-- Mobile-Only Responsive 2x2 Sticker Grid (No horizontal clipping inside narrow embeds) -->
+            <div class="lg:hidden mt-8 grid grid-cols-2 gap-2.5 w-full max-w-sm mx-auto">
+                <div class="bg-[#8A4A8F] text-[#FFF2FA] rounded-xl p-1 shadow-md flex flex-col justify-between">
+                    <div class="text-[8px] font-bold uppercase tracking-wider text-center py-0.5">HELLO my name is</div>
+                    <div class="bg-[#FFFFFF] text-[#2B0F3A] rounded-lg py-1 text-center font-handwriting text-base font-bold leading-tight">Abdul Qayyuum</div>
+                </div>
+                <div class="bg-[#2B0F3A] text-[#FFF2FA] rounded-xl p-2.5 text-left shadow-md flex flex-col justify-center">
+                    <div class="text-[9px] font-mono text-[#C690C7] leading-none">WOA-SVM MODEL</div>
+                    <div class="text-xs font-bold mt-1 leading-tight">96% Test Accuracy</div>
+                </div>
+                <div class="bg-[#FFFFFF] border border-[#C690C7] rounded-xl p-2.5 text-left shadow-md flex flex-col justify-center">
+                    <div class="text-[9px] font-mono text-[#8A4A8F] leading-none">MS FABRIC &amp; BI</div>
+                    <div class="text-xs font-bold text-[#2B0F3A] mt-1 leading-tight">Al-Ikhsan HQ</div>
+                </div>
+                <button type="button" id="mobile-vinyl-toggle" data-vinyl-toggle class="bg-[#FFFFFF] border border-[#C690C7] rounded-xl p-2.5 min-h-[48px] text-left shadow-md flex items-center gap-2 cursor-pointer">
+                    <span id="mobile-vinyl-icon" class="w-6 h-6 rounded-full bg-[#2B0F3A] text-[#C690C7] flex items-center justify-center text-[10px] font-mono shrink-0">●</span>
+                    <span class="min-w-0">
+                        <span class="block text-[9px] font-mono font-bold text-[#8A4A8F] leading-none">CD RECORD</span>
+                        <span id="mobile-vinyl-label" class="block text-[11px] font-bold text-[#2B0F3A] leading-tight mt-0.5 truncate">Click to Play</span>
+                    </span>
+                </button>
+            </div>
+
+            <a href="#work" class="mt-8 sm:mt-10 inline-flex flex-col items-center gap-1 text-[11px] font-medium text-[#5A2A66] hover:text-[#2B0F3A] transition-colors">
+                <span>Scroll to see my work</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECT DEMOS & SELECTED WORK SECTION -->
+    <section id="work" class="relative z-20 bg-[#FFFFFF] border-t border-[#C690C7]/50 py-20 px-4 sm:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="mb-10">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-[#8A4A8F]">LIVE PROOF &amp; CASE STUDIES</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#2B0F3A] mt-1">Featured Project Demos</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+                <a href="https://pharmacy-v3.onrender.com/frontend/login.html"  target="_blank" class="group block bg-[#F7E3F3]/75 hover:bg-[#F7E3F3] border border-[#8A4A8F]/35 hover:border-[#8A4A8F] rounded-3xl p-5 transition-all shadow-sm hover:shadow-md">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 sm:w-14 h-24 sm:h-28 rounded-2xl bg-[#FFFFFF] border border-[#C690C7]/70 flex items-center justify-center text-[#8A4A8F] shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="text-base sm:text-lg font-extrabold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors leading-snug">
+                                    Pharmacy Inventory Web System
+                                </h3>
+                                <span class="text-[#8A4A8F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm shrink-0">↗</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#5A2A66] mt-1 leading-relaxed">
+                                Full-stack ERP system with stock management, expiration tracking, order processing, and analytical reporting.
+                            </p>
+                            <div class="mt-3 flex flex-wrap items-center gap-2">
+                                <span class="inline-block bg-[#8A4A8F]/15 text-[#5A2A66] border border-[#8A4A8F]/30 text-[11px] font-bold px-2.5 py-0.5 rounded-lg">
+                                    Live Web App
+                                </span>
+                                <span class="text-[11px] font-mono text-[#5A2A66] bg-[#FFFFFF] border border-[#C690C7]/60 px-2 py-0.5 rounded-md">#ERPSystem</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://gold-alchemy.onrender.com/"  target="_blank" class="group block bg-[#FFF2FA] hover:bg-[#F7E3F3]/80 border border-[#C690C7] hover:border-[#5A2A66] rounded-3xl p-5 transition-all shadow-sm hover:shadow-md">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 sm:w-14 h-24 sm:h-28 rounded-2xl bg-[#FFFFFF] border border-[#C690C7]/70 flex items-center justify-center text-[#5A2A66] shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="text-base sm:text-lg font-extrabold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors leading-snug">
+                                    Gold Price Forecasting (WOA-SVM)
+                                </h3>
+                                <span class="text-[#8A4A8F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm shrink-0">↗</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#5A2A66] mt-1 leading-relaxed">
+                                Hybrid Machine Learning forecasting research combining Whale Optimization Algorithm &amp; SVM reaching 96% test accuracy.
+                            </p>
+                            <div class="mt-3 flex flex-wrap items-center gap-2">
+                                <span class="inline-block bg-[#5A2A66]/15 text-[#2B0F3A] border border-[#5A2A66]/30 text-[11px] font-bold px-2.5 py-0.5 rounded-lg">
+                                    96% Accuracy ML
+                                </span>
+                                <span class="text-[11px] font-mono text-[#5A2A66] bg-[#FFFFFF] border border-[#C690C7]/60 px-2 py-0.5 rounded-md">#WOASVM</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://finance-app-web-sample.pages.dev/"  target="_blank" class="group block bg-[#F7E3F3]/60 hover:bg-[#F7E3F3] border border-[#C690C7] hover:border-[#8A4A8F] rounded-3xl p-5 transition-all shadow-sm hover:shadow-md">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 sm:w-14 h-24 sm:h-28 rounded-2xl bg-[#FFFFFF] border border-[#C690C7]/70 flex items-center justify-center text-[#8A4A8F] shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="text-base sm:text-lg font-extrabold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors leading-snug">
+                                    Financial Mobile App Web Demo
+                                </h3>
+                                <span class="text-[#8A4A8F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm shrink-0">↗</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#5A2A66] mt-1 leading-relaxed">
+                                Interactive mobile app UI prototype &amp; Gemini API receipt scanner with MongoDB expense and budget analytics.
+                            </p>
+                            <div class="mt-3 flex flex-wrap items-center gap-2">
+                                <span class="inline-block bg-[#8A4A8F]/15 text-[#5A2A66] border border-[#8A4A8F]/30 text-[11px] font-bold px-2.5 py-0.5 rounded-lg">
+                                    Interactive Mobile UI
+                                </span>
+                                <span class="text-[11px] font-mono text-[#5A2A66] bg-[#FFFFFF] border border-[#C690C7]/60 px-2 py-0.5 rounded-md">#Fintech</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://landing-page-freelance.pages.dev/" target="_blank" rel="noopener noreferrer" class="group block bg-[#FFFFFF] hover:bg-[#FFF2FA] border border-[#C690C7] hover:border-[#5A2A66] rounded-3xl p-5 transition-all shadow-sm hover:shadow-md">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 sm:w-14 h-24 sm:h-28 rounded-2xl bg-[#F7E3F3] border border-[#C690C7]/70 flex items-center justify-center text-[#2B0F3A] shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="text-base sm:text-lg font-extrabold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors leading-snug">
+                                    Full Portfolio Webpage
+                                </h3>
+                                <span class="text-[#8A4A8F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm shrink-0">↗</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#5A2A66] mt-1 leading-relaxed">
+                                Explore my complete biography, background experience, freelance services, and systems engineering projects.
+                            </p>
+                            <div class="mt-3 flex flex-wrap items-center gap-2">
+                                <span class="inline-block bg-[#5A2A66]/15 text-[#2B0F3A] border border-[#5A2A66]/30 text-[11px] font-bold px-2.5 py-0.5 rounded-lg">
+                                    Main Webpage
+                                </span>
+                                <span class="text-[11px] font-mono text-[#5A2A66] bg-[#FFF2FA] border border-[#C690C7]/60 px-2 py-0.5 rounded-md">#Freelance</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mb-8">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Selected Work</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#2B0F3A] mt-1">Projects &amp; systems I've built.</h3>
+                <p class="text-sm text-[#5A2A66] mt-2">Practical AI models, financial applications, enterprise data pipelines, and web systems from my resume.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article class="group bg-[#FFF2FA]/80 rounded-3xl p-6 sm:p-7 border border-[#C690C7]/70 hover:border-[#8A4A8F] transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-[#F7E3F3] text-[#5A2A66] border border-[#C690C7]">2026 • Final Year Project</span>
+                            <span class="text-xs font-mono font-semibold text-[#8A4A8F]">99% Train / 96% Test</span>
+                        </div>
+                        <h4 class="text-lg sm:text-xl font-bold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors">
+                            Hybrid Gold Price Forecasting (WOA-SVM)
+                        </h4>
+                        <p class="mt-2.5 text-sm text-[#5A2A66] leading-relaxed">
+                            Engineered a hybrid time-series forecasting model pairing the <strong>Whale Optimization Algorithm (WOA)</strong> with a <strong>Support Vector Machine (SVM)</strong> to analyze historical gold prices and macroeconomic indicators.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-[#C690C7]/50 flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Python</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">WOA-SVM</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Time Series</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Macroeconomic Data</span>
+                    </div>
+                </article>
+
+                <article class="group bg-[#FFF2FA]/80 rounded-3xl p-6 sm:p-7 border border-[#C690C7]/70 hover:border-[#8A4A8F] transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-[#F7E3F3] text-[#5A2A66] border border-[#C690C7]">2026 • AI &amp; Mobile</span>
+                            <span class="text-xs font-mono font-semibold text-[#8A4A8F]">Gemini API + MongoDB</span>
+                        </div>
+                        <h4 class="text-lg sm:text-xl font-bold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors">
+                            AI-Powered Finance Manager Application
+                        </h4>
+                        <p class="mt-2.5 text-sm text-[#5A2A66] leading-relaxed">
+                            Built a mobile-first financial application using the <strong>Gemini API</strong> to scan and auto-categorize receipts into <strong>MongoDB</strong>, complete with savings goals, a financial impact calculator, and personal/business expense history.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-[#C690C7]/50 flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Gemini API</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">MongoDB</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Receipt OCR</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Expense Analytics</span>
+                    </div>
+                </article>
+
+                <article class="group bg-[#FFF2FA]/80 rounded-3xl p-6 sm:p-7 border border-[#C690C7]/70 hover:border-[#8A4A8F] transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-[#2B0F3A] text-[#FFF2FA]">Apr – Jul 2026 • Al-Ikhsan HQ</span>
+                            <span class="text-xs font-mono font-semibold text-[#5A2A66]">80% Real-Time BI</span>
+                        </div>
+                        <h4 class="text-lg sm:text-xl font-bold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors">
+                            Enterprise BI Migration, Fabric &amp; Budget Controls
+                        </h4>
+                        <p class="mt-2.5 text-sm text-[#5A2A66] leading-relaxed">
+                            Supported migration from Qlik Sense to <strong>Power BI</strong> covering 80% of real-time company analytics, developed <strong>Microsoft Fabric</strong> Lakehouse/Warehouse/pipelines, and built SQL-backed <strong>PO &amp; MOH Budget Control</strong> systems.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-[#C690C7]/50 flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Microsoft Fabric</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Power BI</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">SQL &amp; Excel</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Lakehouse</span>
+                    </div>
+                </article>
+
+                <article class="group bg-[#FFF2FA]/80 rounded-3xl p-6 sm:p-7 border border-[#C690C7]/70 hover:border-[#8A4A8F] transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-[#F7E3F3] text-[#5A2A66] border border-[#C690C7]">2023 – 2025 • Web &amp; IoT</span>
+                            <span class="text-xs font-mono font-semibold text-[#8A4A8F]">Public &amp; Community</span>
+                        </div>
+                        <h4 class="text-lg sm:text-xl font-bold text-[#2B0F3A] group-hover:text-[#8A4A8F] transition-colors">
+                            GovTech Operations Portals &amp; SULAM Flood IoT
+                        </h4>
+                        <p class="mt-2.5 text-sm text-[#5A2A66] leading-relaxed">
+                            Built case-reporting and IT asset/maintenance web systems for <strong>Pejabat Tanah Batu Pahat</strong>, and served as <strong>Program Acting Director</strong> for a <strong>SULAM Flood Emergency IoT</strong> community initiative in flood-prone villages.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-[#C690C7]/50 flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Web Systems</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Asset Tracking</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">IoT Flood Alert</span>
+                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#FFFFFF] text-[#2B0F3A] border border-[#C690C7]/60">Leadership</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE, EDUCATION & CREDENTIALS SECTION -->
+    <section id="experience" class="relative z-20 bg-[#FFF2FA] border-t border-[#C690C7]/50 py-20 px-4 sm:px-8">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-7">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Experience</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#2B0F3A] mt-1 mb-6">Where I've worked.</h2>
+
+                <div class="space-y-5">
+                    <div class="bg-[#FFFFFF] rounded-3xl p-6 border border-[#C690C7]/60 shadow-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-base font-bold text-[#2B0F3A]">Information System Engineering Intern</h3>
+                            <span class="text-xs font-mono text-[#8A4A8F] font-semibold">Apr 2026 – Jul 2026</span>
+                        </div>
+                        <p class="text-xs font-semibold text-[#5A2A66] mt-0.5">Al-Ikhsan (KL HQ) • Damansara, Selangor</p>
+                        <ul class="mt-3.5 space-y-2 text-xs sm:text-sm text-[#5A2A66] list-disc list-inside">
+                            <li>Built SQL queries and Excel SQL connections to streamline reporting and business decisions.</li>
+                            <li>Developed a Purchase Order Control system to restrict off-process product transfers.</li>
+                            <li>Built an MOH Budget Control system to prevent monthly product purchase overspending.</li>
+                            <li>Supported Qlik Sense to Power BI analytics migration covering 80% of real-time company data.</li>
+                            <li>Worked with Microsoft Fabric pipelines, notebooks, Lakehouse, Warehouse, and ML workflows.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#FFFFFF] rounded-3xl p-6 border border-[#C690C7]/60 shadow-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-base font-bold text-[#2B0F3A]">Banquet Part-Timer</h3>
+                            <span class="text-xs font-mono text-[#8A4A8F] font-semibold">May 2024 – Feb 2026</span>
+                        </div>
+                        <p class="text-xs font-semibold text-[#5A2A66] mt-0.5">Mardiyyah Hotel • Shah Alam, Selangor</p>
+                        <ul class="mt-3.5 space-y-2 text-xs sm:text-sm text-[#5A2A66] list-disc list-inside">
+                            <li>Delivered guest service and event floor setup for high-volume functions (100+ guests/day).</li>
+                            <li>Supported weddings, annual dinners, holiday events, and special celebrations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#FFFFFF] rounded-3xl p-6 border border-[#C690C7]/60 shadow-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-base font-bold text-[#2B0F3A]">Internship — Penguatkuasa, ICT &amp; Admin</h3>
+                            <span class="text-xs font-mono text-[#8A4A8F] font-semibold">Sep 2023 – Feb 2024</span>
+                        </div>
+                        <p class="text-xs font-semibold text-[#5A2A66] mt-0.5">Pejabat Tanah Batu Pahat • Batu Pahat, Johor</p>
+                        <ul class="mt-3.5 space-y-2 text-xs sm:text-sm text-[#5A2A66] list-disc list-inside">
+                            <li>Developed a web application for the Penguatkuasa department to log case reports.</li>
+                            <li>Built a web portal to track critical computer assets and maintenance records office-wide.</li>
+                            <li>Provided hands-on IT troubleshooting and technical assistance across departments.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-10">
+                <div>
+                    <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Education</span>
+                    <h2 class="text-2xl font-extrabold tracking-tight text-[#2B0F3A] mt-1 mb-6">Academic background.</h2>
+
+                    <div class="space-y-4">
+                        <div class="bg-[#FFFFFF] rounded-3xl p-5 border border-[#C690C7]/60 shadow-sm">
+                            <div class="flex items-center justify-between text-xs font-mono text-[#5A2A66]">
+                                <span>2023 – 2026</span>
+                                <span class="text-[#FFF2FA] bg-[#8A4A8F] font-semibold px-2.5 py-0.5 rounded-full">CGPA 3.48</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-[#2B0F3A] mt-2">B.Sc. (Hons.) Information Systems — Intelligent Systems Engineering</h3>
+                            <p class="text-xs text-[#5A2A66] mt-1">Universiti Teknologi MARA (UiTM) Shah Alam</p>
+                        </div>
+
+                        <div class="bg-[#FFFFFF] rounded-3xl p-5 border border-[#C690C7]/60 shadow-sm">
+                            <div class="flex items-center justify-between text-xs font-mono text-[#5A2A66]">
+                                <span>2021 – 2024</span>
+                                <span class="text-[#FFF2FA] bg-[#8A4A8F] font-semibold px-2.5 py-0.5 rounded-full">CGPA 3.62</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-[#2B0F3A] mt-2">Diploma in Computer Science</h3>
+                            <p class="text-xs text-[#5A2A66] mt-1">Universiti Teknologi MARA (UiTM) Segamat • COMPASS Club Bureau</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Credentials</span>
+                    <h2 class="text-xl font-extrabold tracking-tight text-[#2B0F3A] mt-1 mb-4">Certifications &amp; Workshops.</h2>
+                    <div class="bg-[#FFFFFF] rounded-3xl p-5 border border-[#C690C7]/60 shadow-sm space-y-3.5 text-xs">
+                        <div class="pb-3 border-b border-[#F7E3F3]">
+                            <p class="font-bold text-[#2B0F3A]">Agentic AI &amp; Business Automation with n8n</p>
+                            <p class="text-[#5A2A66] mt-0.5">MSU Academy • National Training Week 2026</p>
+                        </div>
+                        <div class="pb-3 border-b border-[#F7E3F3]">
+                            <p class="font-bold text-[#2B0F3A]">Google Cloud Data Practitioners Class</p>
+                            <p class="text-[#5A2A66] mt-0.5">Data ingestion, pipelines, ML &amp; visualization • 2025</p>
+                        </div>
+                        <div class="pb-3 border-b border-[#F7E3F3]">
+                            <p class="font-bold text-[#2B0F3A]">LLM-Powered Application Workshop</p>
+                            <p class="text-[#5A2A66] mt-0.5">Production LLM deployment • 2025</p>
+                        </div>
+                        <div class="pb-3 border-b border-[#F7E3F3]">
+                            <p class="font-bold text-[#2B0F3A]">Ericsson 5G &amp; Emerging Tech Badges (3 Modules)</p>
+                            <p class="text-[#5A2A66] mt-0.5">5G, AI, IoT, Cloud/Edge, Cybersecurity • 2025</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#2B0F3A]">Oracle APEX Database Certification</p>
+                            <p class="text-[#5A2A66] mt-0.5">Enterprise low-code &amp; Oracle DB • 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL STACK SECTION -->
+    <section id="stack" class="relative z-20 bg-[#FFFFFF] border-t border-[#C690C7]/50 py-20 px-4 sm:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Capabilities &amp; Tools</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#2B0F3A] mt-1">Technical Stack</h2>
+                <p class="text-sm text-[#5A2A66] mt-2">From training hybrid ML models and orchestrating agentic workflows to building enterprise BI warehouses and full-stack web apps.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#FFF2FA]/70 rounded-3xl p-6 border border-[#C690C7]/60">
+                    <div class="w-9 h-9 rounded-xl bg-[#8A4A8F] text-[#FFF2FA] flex items-center justify-center mb-4 font-mono text-sm font-bold">AI</div>
+                    <h3 class="text-base font-bold text-[#2B0F3A] mb-3">AI &amp; Machine Learning</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Python</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Machine Learning</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Gemini API</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">n8n Agentic AI</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">R Language</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Decision Support</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">API Integration</span>
+                    </div>
+                </div>
+
+                <div class="bg-[#FFF2FA]/70 rounded-3xl p-6 border border-[#C690C7]/60">
+                    <div class="w-9 h-9 rounded-xl bg-[#5A2A66] text-[#FFF2FA] flex items-center justify-center mb-4 font-mono text-sm font-bold">BI</div>
+                    <h3 class="text-base font-bold text-[#2B0F3A] mb-3">Data &amp; Enterprise Databases</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Power BI</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Microsoft Fabric</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Lakehouse &amp; Warehouse</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">SQL &amp; MySQL</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">MongoDB</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Oracle APEX</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Excel SQL</span>
+                    </div>
+                </div>
+
+                <div class="bg-[#FFF2FA]/70 rounded-3xl p-6 border border-[#C690C7]/60">
+                    <div class="w-9 h-9 rounded-xl bg-[#2B0F3A] text-[#FFF2FA] flex items-center justify-center mb-4 font-mono text-sm font-bold">WEB</div>
+                    <h3 class="text-base font-bold text-[#2B0F3A] mb-3">Web &amp; Software Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">JavaScript</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">HTML5 &amp; CSS3</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">PHP &amp; phpMyAdmin</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Flask</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">C++</span>
+                        <span class="px-3 py-1.5 bg-[#FFFFFF] border border-[#C690C7]/70 rounded-xl text-xs font-medium text-[#2B0F3A]">Laragon</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-[#FFF2FA]/80 rounded-3xl p-6 border border-[#C690C7]/60">
+                <p class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F] mb-3">Core Strengths &amp; Soft Skills</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Leadership &amp; Program Direction</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Problem Solving</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Critical Thinking</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Project Management</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Teamwork &amp; Communication</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Adaptability &amp; Flexibility</span>
+                    <span class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#C690C7]/70 text-xs font-medium text-[#2B0F3A]">Time Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & FOOTER -->
+    <footer id="contact" class="relative z-20 bg-[#FFF2FA] border-t border-[#C690C7]/60 py-16 px-4 sm:px-8">
+        <div class="max-w-4xl mx-auto bg-[#FFFFFF] rounded-3xl p-6 sm:p-10 border border-[#C690C7] shadow-sm text-center">
+            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A4A8F]">Get In Touch</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#2B0F3A] mt-1">Let's build something practical.</h2>
+            <p class="text-sm text-[#5A2A66] max-w-md mx-auto mt-2">
+                Open to full-time roles in AI Engineering, Data Science, BI &amp; Analytics, and Software/Web Development, as well as freelance builds.
+            </p>
+
+            <div class="mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+                <button type="button" onclick="copyText('abdulqayyuum21@gmail.com', 'Email copied: abdulqayyuum21@gmail.com')" class="inline-flex items-center justify-center gap-2 bg-[#8A4A8F] hover:bg-[#5A2A66] text-[#FFF2FA] text-xs sm:text-sm font-semibold px-4 sm:px-5 py-3 rounded-full shadow-md transition-all cursor-pointer max-w-full">
+                    <span class="truncate">abdulqayyuum21@gmail.com</span>
+                    <span class="text-[11px] font-mono bg-[#FFF2FA]/20 px-2 py-0.5 rounded-full shrink-0">Copy</span>
+                </button>
+
+                <a href="https://www.linkedin.com/in/abdul-qayyuum-9883b127b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7E3F3] text-[#2B0F3A] border border-[#C690C7] text-xs sm:text-sm font-semibold px-5 py-3 rounded-full transition-all">
+                    LinkedIn ↗
+                </a>
+                <a href="https://landing-page-freelance.pages.dev/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#2B0F3A] hover:bg-[#5A2A66] text-[#FFF2FA] text-xs sm:text-sm font-semibold px-5 py-3 rounded-full transition-all">
+                    Freelance Page ↗
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto mt-10 pt-6 border-t border-[#C690C7]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#5A2A66] text-center sm:text-left">
+            <p>© <span id="year"></span> Abdul Qayyuum Bin Jemualiasmisri. All rights reserved.</p>
+            <p class="font-mono">AI • Data Science • Web &amp; Database Systems</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Toast helper
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (!toast || !toastMsg) return;
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2600);
+        }
+
+        // Clipboard helper with iframe-safe fallback
+        function copyText(text, successMsg) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(() => fallbackCopy(text, successMsg));
+            } else {
+                fallbackCopy(text, successMsg);
+            }
+        }
+
+        function fallbackCopy(text, successMsg) {
+            const input = document.createElement('input');
+            input.value = text;
+            input.style.position = 'fixed';
+            input.style.opacity = '0';
+            document.body.appendChild(input);
+            input.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMsg);
+            } catch (err) {
+                showToast(text);
+            }
+            document.body.removeChild(input);
+        }
+
+        // 1. Active Navigation Pill Highlight on Scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = 'home';
+            sections.forEach(sec => {
+                const top = sec.offsetTop - 160;
+                if (window.scrollY >= top) {
+                    current = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').replace('#', '');
+                if (href === current) {
+                    link.classList.add('bg-[#F7E3F3]', 'text-[#2B0F3A]', 'font-semibold');
+                    link.classList.remove('text-[#5A2A66]', 'font-medium');
+                } else {
+                    link.classList.remove('bg-[#F7E3F3]', 'text-[#2B0F3A]', 'font-semibold');
+                    link.classList.add('text-[#5A2A66]', 'font-medium');
+                }
+            });
+        }, { passive: true });
+
+        // 2. Make Hero Desk Stickers Interactive & Draggable (with click-to-toggle CD playback)
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickers = document.querySelectorAll('[data-draggable]');
+            let highestZ = 30;
+
+            // Optional custom track URL: replace empty string with your own .mp3/.ogg URL if desired
+            const customTrackUrl = './music/Wuthering_Waves_Homecoming_Star_from_the_Unbound.aac';
+            let audioEl = null;
+            let audioCtx = null;
+            let loopTimer = null;
+            let isPlayingVinyl = false;
+            let stepIndex = 0;
+
+            // Chill chord progression + warm bass & bell melody in Web Audio
+            const progression = [
+                { bass: 130.81, notes: [523.25, 659.25, 783.99, 987.77] }, // Cmaj7
+                { bass: 110.00, notes: [440.00, 523.25, 659.25, 783.99] }, // Am7
+                { bass: 87.31,  notes: [349.23, 440.00, 659.25, 783.99] }, // Fmaj7
+                { bass: 98.00,  notes: [392.00, 493.88, 587.33, 783.99] }  // G6
+            ];
+
+            function triggerSynthBeat() {
+                if (!audioCtx || !isPlayingVinyl) return;
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume().catch(() => {});
+                }
+                try {
+                    const now = audioCtx.currentTime;
+                    const bar = progression[Math.floor(stepIndex / 4) % progression.length];
+                    const beatInBar = stepIndex % 4;
+                    const noteFreq = bar.notes[beatInBar];
+                    stepIndex += 1;
+
+                    // Soft warm pad / electric piano tone
+                    const mainOsc = audioCtx.createOscillator();
+                    const subOsc = audioCtx.createOscillator();
+                    const filter = audioCtx.createBiquadFilter();
+                    const gain = audioCtx.createGain();
+
+                    mainOsc.type = 'triangle';
+                    mainOsc.frequency.setValueAtTime(noteFreq, now);
+
+                    subOsc.type = 'sine';
+                    subOsc.frequency.setValueAtTime(beatInBar === 0 ? bar.bass : bar.bass * 1.5, now);
+
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(1800, now);
+
+                    gain.gain.setValueAtTime(0.0001, now);
+                    gain.gain.linearRampToValueAtTime(0.28, now + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.48);
+
+                    mainOsc.connect(filter);
+                    subOsc.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    mainOsc.start(now);
+                    subOsc.start(now);
+                    mainOsc.stop(now + 0.5);
+                    subOsc.stop(now + 0.5);
+                } catch (_) {
+                    // Ignore audio scheduling errors
+                }
+            }
+
+            function syncVinylUi(playing) {
+                const rotor = document.getElementById('vinyl-disc-rotor');
+                const badge = document.getElementById('vinyl-status-badge');
+                const mobileIcon = document.getElementById('mobile-vinyl-icon');
+                const mobileLabel = document.getElementById('mobile-vinyl-label');
+
+                if (rotor) {
+                    rotor.classList.toggle('animate-spin-disc', playing);
+                }
+                if (badge) {
+                    badge.classList.toggle('hidden', !playing);
+                }
+                if (mobileIcon) {
+                    mobileIcon.classList.toggle('animate-spin-disc', playing);
+                    mobileIcon.textContent = playing ? '♫' : '●';
+                }
+                if (mobileLabel) {
+                    mobileLabel.textContent = playing ? 'Playing • Stop' : 'Click to Play';
+                }
+            }
+
+            async function toggleVinylPlayback() {
+                const nextState = !isPlayingVinyl;
+                isPlayingVinyl = nextState;
+                syncVinylUi(isPlayingVinyl);
+
+                clearInterval(loopTimer);
+                loopTimer = null;
+
+                if (!isPlayingVinyl) {
+                    if (audioEl) {
+                        audioEl.pause();
+                    }
+                    showToast('CD stopped');
+                    return;
+                }
+
+                // Try custom audio track if provided, otherwise run Web Audio chill loop
+                if (customTrackUrl) {
+                    if (!audioEl) {
+                        audioEl = new Audio(customTrackUrl);
+                        audioEl.loop = true;
+                        audioEl.volume = 0.7;
+                    }
+                    try {
+                        await audioEl.play();
+                        showToast('CD spinning • Track playing (click CD to stop)');
+                        return;
+                    } catch (_) {
+                        // Fall back to Web Audio synth if blocked or unreachable
+                    }
+                }
+
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!audioCtx && AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    try {
+                        await audioCtx.resume();
+                    } catch (_) {}
+                }
+
+                triggerSynthBeat();
+                loopTimer = setInterval(triggerSynthBeat, 420);
+                showToast('CD spinning • Music playing (click CD again to stop)');
+            }
+
+            document.querySelectorAll('[data-vinyl-toggle]').forEach(el => {
+                if (!el.hasAttribute('data-draggable')) {
+                    el.addEventListener('click', toggleVinylPlayback);
+                }
+            });
+
+            stickers.forEach(sticker => {
+                let isDragging = false;
+                let movedDistance = 0;
+                let startX, startY, initialLeft, initialTop;
+
+                const onPointerDown = (e) => {
+                    isDragging = true;
+                    movedDistance = 0;
+                    highestZ += 1;
+                    sticker.style.zIndex = highestZ;
+                    sticker.style.transition = 'none';
+
+                    const rect = sticker.getBoundingClientRect();
+                    const parentRect = sticker.parentElement.getBoundingClientRect();
+
+                    initialLeft = rect.left - parentRect.left;
+                    initialTop = rect.top - parentRect.top;
+                    sticker.style.left = `${initialLeft}px`;
+                    sticker.style.top = `${initialTop}px`;
+                    sticker.style.right = 'auto';
+                    sticker.style.bottom = 'auto';
+
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    if (sticker.setPointerCapture) {
+                        try { sticker.setPointerCapture(e.pointerId); } catch (_) {}
+                    }
+                };
+
+                const onPointerMove = (e) => {
+                    if (!isDragging) return;
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    movedDistance = Math.hypot(dx, dy);
+                    sticker.style.left = `${initialLeft + dx}px`;
+                    sticker.style.top = `${initialTop + dy}px`;
+                };
+
+                const onPointerUp = (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    sticker.style.transition = 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1)';
+                    if (sticker.releasePointerCapture) {
+                        try { sticker.releasePointerCapture(e.pointerId); } catch (_) {}
+                    }
+
+                    if (movedDistance < 8 && sticker.hasAttribute('data-vinyl-toggle')) {
+                        toggleVinylPlayback();
+                    }
+                };
+
+                sticker.addEventListener('pointerdown', onPointerDown);
+                sticker.addEventListener('pointermove', onPointerMove);
+                sticker.addEventListener('pointerup', onPointerUp);
+                sticker.addEventListener('pointercancel', onPointerUp);
+            });
+
+            // 3. Fade out fixed hero stickers smoothly when scrolling past the hero section
+            const deskStage = document.getElementById('desk-stage');
+            window.addEventListener('scroll', () => {
+                if (!deskStage) return;
+                const scrollY = window.scrollY;
+                const heroHeight = window.innerHeight;
+                const opacity = Math.max(0, 1 - (scrollY / (heroHeight * 0.65)));
+                deskStage.style.opacity = opacity;
+                deskStage.style.visibility = opacity <= 0.02 ? 'hidden' : 'visible';
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>

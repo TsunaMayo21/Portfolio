@@ -1,0 +1,105 @@
+
+/* --- General --- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FFF2FA;
+  color: #2B0F3A;
+  overflow-x: hidden;
+}
+
+/* --- Background --- */
+.desk-grid,
+.bg-dot-grid {
+  background-color: #FFF2FA;
+  background-image: radial-gradient(#C690C7 1.15px, transparent 1.15px);
+  background-size: 24px 24px;
+}
+
+/* --- Hide Scrollbar --- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* --- Draggable Stickers --- */
+.tactile-sticker,
+.sticker-item {
+  transform: rotate(var(--rot, 0deg));
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease;
+}
+
+.tactile-sticker:hover,
+.sticker-item:hover {
+  z-index: 30;
+  border-color: #8A4A8F;
+  box-shadow: 0 16px 34px -8px rgba(43, 15, 58, 0.24);
+}
+
+.tactile-sticker.is-dragging,
+.sticker-item.is-dragging {
+  cursor: grabbing;
+  z-index: 40;
+}
+
+/* --- Sticker Effects --- */
+.diecut-sticker {
+  filter:
+    drop-shadow(0 0 2px #FFFFFF)
+    drop-shadow(0 0 2px #FFFFFF)
+    drop-shadow(0 12px 20px rgba(43, 15, 58, 0.18));
+}
+
+.tape-strip {
+  background: rgba(198, 144, 199, 0.55);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 2px 6px rgba(43, 15, 58, 0.12);
+  border-left: 1px dashed rgba(43, 15, 58, 0.18);
+  border-right: 1px dashed rgba(43, 15, 58, 0.18);
+}
+
+/* --- Animations --- */
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-6px) rotate(var(--rot, 0deg));
+  }
+}
+
+.vinyl-disc.is-spinning,
+.animate-spin-disc {
+  animation: vinyl-spin 2.8s linear infinite;
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* --- Navigation --- */
+.nav-link.active {
+  background-color: rgba(198, 144, 199, 0.28);
+  color: #2B0F3A;
+}
